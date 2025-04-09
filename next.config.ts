@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 import withMDX from '@next/mdx';
+import remarkGfm from "remark-gfm";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'mdx'],
-};
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'mdx', 'md'],
+}
 
 const mdx = withMDX({
   extension: /\.mdx?$/,
@@ -14,5 +14,6 @@ const mdx = withMDX({
     rehypePlugins: [],
   },
 })
+
 
 export default mdx(nextConfig);
