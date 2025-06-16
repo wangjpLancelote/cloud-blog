@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 import withMDX from '@next/mdx';
-import remarkGfm from "remark-gfm";
+import rehypePrism from 'rehype-prism-plus';
+import type { PluggableList } from "unified";
+
 
 const nextConfig: NextConfig = {
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'mdx', 'md'],
@@ -11,7 +13,7 @@ const mdx = withMDX({
   options: {
     // mdx options
     remarkPlugins: [],
-    rehypePlugins: [],
+    rehypePlugins: [rehypePrism ] as PluggableList,
   },
 })
 
