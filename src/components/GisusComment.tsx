@@ -1,6 +1,8 @@
 'use client'
+import dynamic from 'next/dynamic'
 
-import Giscus from '@giscus/react'
+// import Giscus from '@giscus/react'
+const Giscus = dynamic(() => import('@giscus/react').then(mod => mod.default), { ssr: false })
 
 export default function GiscusComment() {
 

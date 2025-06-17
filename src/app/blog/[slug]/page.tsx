@@ -5,7 +5,15 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import Layout from '../../../components/Layout';
 import Custom from '../../../components/Custom';
 import GiscusComment from '@/components/GisusComment';
+import rehypePrettyCode from 'rehype-pretty-code';
 
+const options = {
+  theme: {
+    dark: 'laserwave',
+    light: 'light-plus',
+  },
+  keepBackground: false, 
+};
 
 export async function generateStaticParams() {
   const files = fs.readdirSync(path.join(process.cwd(), 'src/posts'));
@@ -21,11 +29,17 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
   return (
     <Layout>
-        <article className="prose prose-lg dark:prose-invert">
+        <article className="dark:prose-invert prose prose-lg">
             <h1>{data.title}</h1>
-            <MDXRemote source={content} components={{ Custom }} />
+            <MDXRemote source={content} components={{ Custom }} options={{
+              mdxOptions: {
+                remarkPlugins: [],
+                rehypePlugins: [
+                  [ rehypePrettyCode, options ]
+                ]
+              },
+            }} />
         </article>
-      <hr />
       <GiscusComment />
     </Layout>
   );
