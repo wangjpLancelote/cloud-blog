@@ -16,8 +16,6 @@ export default async function Home() {
     };
   });
 
-  console.log('>>>>', posts)
-
   return (
     <Layout>
       <h1>我的 MDX 博客 (App Router)</h1>
