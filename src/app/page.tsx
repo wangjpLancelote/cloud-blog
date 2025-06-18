@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
 import Layout from '../components/Layout';
+import BlogHeader from '@/components/Header';
 
 export default async function Home() {
   const files = fs.readdirSync(path.join(process.cwd(), 'src/posts'));
@@ -18,7 +19,9 @@ export default async function Home() {
 
   return (
     <Layout>
-      <h1>我的 MDX 博客 (App Router)</h1>
+      <BlogHeader>
+        <h1 className='text-center'>我的</h1>
+      </BlogHeader>
       <ul>
         {posts.map(post => (
           <li key={post.slug}>
