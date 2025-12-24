@@ -6,6 +6,27 @@ const config: Config = {
   // Tailwind CSS v4 auto-discovers content; only keep theme/plugins here.
   theme: {
     extend: {
+      colors: {
+        primary: "hsl(var(--color-primary))",
+        "primary-text": "hsl(var(--color-primary-text))",
+        secondary: "hsl(var(--color-secondary))",
+        "secondary-text": "hsl(var(--color-secondary-text))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        destructive: "hsl(var(--destructive))",
+        "destructive-text": "hsl(var(--destructive-foreground))",
+        muted: "hsl(var(--muted))",
+        "muted-text": "hsl(var(--muted-foreground))",
+        accent: "hsl(var(--accent))",
+        "accent-text": "hsl(var(--accent-foreground))",
+        popover: "hsl(var(--popover))",
+        "popover-text": "hsl(var(--popover-foreground))",
+        card: "hsl(var(--card))",
+        "card-text": "hsl(var(--card-foreground))",
+      },
       animation: {
         "gradient-flow": "gradient-flow 15s ease infinite",
       },
