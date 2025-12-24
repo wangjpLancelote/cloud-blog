@@ -46,7 +46,9 @@
     color-scheme: dark;
   }
 
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     border-color: hsl(var(--border));
   }
 
@@ -56,4 +58,3 @@
     font-family: Arial, Helvetica, sans-serif;
   }
 }
-

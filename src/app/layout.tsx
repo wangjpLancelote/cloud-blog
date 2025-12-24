@@ -3,11 +3,11 @@ import "./(style)/tailwind.css";
 import "./(style)/base.css";
 import "./(style)/components.css";
 import "./(style)/utilities.css";
-import { geist, geistMono } from "./(style)/fonts";
-import { AppToaster } from "@/components/ui/toaster";
-import { TranslateSwitcher } from "@/app/(translate)/Translate";
 import { I18nProvider } from "@/app/(translate)/I18nProvider";
+import { TranslateSwitcher } from "@/app/(translate)/Translate";
+import { AppToaster } from "@/components/ui/toaster";
 import { StoreProvider } from "@/store/provider";
+import { geist, geistMono } from "./(style)/fonts";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="auto">
+    <html lang="en">
       <body className={`${geist.variable} ${geistMono.variable} antialiased `}>
         <AppToaster />
         <StoreProvider>

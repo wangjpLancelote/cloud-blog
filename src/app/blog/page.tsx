@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import Layout from '@/components/Layout';
-import BlogHeader from '@/components/Header';
-import { getAllPosts } from '@/lib/posts';
+import BlogHeader from "@/components/Header";
+import Layout from "@/components/Layout";
+import { getAllPosts } from "@/lib/posts";
+import Link from "next/link";
 
 export default async function BlogIndex() {
   const posts = getAllPosts();
@@ -21,4 +21,3 @@ export default async function BlogIndex() {
     </Layout>
   );
 }
-

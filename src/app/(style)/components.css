@@ -1,4 +1,4 @@
-@import 'prismjs/themes/prism.css';
+@import "prismjs/themes/prism.css";
 
 [data-rehype-pretty-code-figure] {
   margin-block: 1.5rem;
@@ -33,7 +33,7 @@ pre {
   padding: 1rem;
   border-radius: 0.5rem;
   overflow-x: auto;
-  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  font-family: "Fira Code", "JetBrains Mono", monospace;
   font-size: 0.9rem;
   line-height: 1.6;
 }
@@ -61,4 +61,3 @@ html.dark pre code span {
 pre code span {
   color: inherit;
 }
-

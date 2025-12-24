@@ -1,15 +1,15 @@
+import withMDX from "@next/mdx";
 import type { NextConfig } from "next";
-import withMDX from '@next/mdx';
-import rehypePrism from 'rehype-prism-plus';
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypePrism from "rehype-prism-plus";
 import type { PluggableList } from "unified";
-import rehypePrettyCode from 'rehype-pretty-code';
 
 const options = {
   // 使用你喜欢的主题
   // 可以是一个字符串，或者一个包含 light/dark 模式的对象
   theme: {
-    dark: 'github-dark-dimmed',
-    light: 'github-light',
+    dark: "github-dark-dimmed",
+    light: "github-light",
   },
   // 在代码块渲染时保持 `background-color`，即使主题中定义了
   // 这对于自定义代码块的背景很有用
@@ -18,10 +18,9 @@ const options = {
   // ...
 };
 
-
 const nextConfig: NextConfig = {
-  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'mdx', 'md'],
-}
+  pageExtensions: ["ts", "tsx", "js", "jsx", "mdx", "md"],
+};
 
 const mdx = withMDX({
   extension: /\.mdx?$/,
@@ -30,7 +29,6 @@ const mdx = withMDX({
     remarkPlugins: [],
     rehypePlugins: [rehypePrism, rehypePrettyCode, options] as PluggableList,
   },
-})
-
+});
 
 export default mdx(nextConfig);

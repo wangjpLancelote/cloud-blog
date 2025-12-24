@@ -1,8 +1,8 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
+import fs from "node:fs";
+import path from "node:path";
+import matter from "gray-matter";
 
-const postsDirectory = path.join(process.cwd(), 'src/posts'); // posts 目录
+const postsDirectory = path.join(process.cwd(), "src/posts"); // posts 目录
 
 export type PostFrontmatter = {
   title: string;
@@ -22,12 +22,12 @@ export type PostWithContent = PostItem & { content: string };
 export function getAllPostSlugs() {
   return fs
     .readdirSync(postsDirectory)
-    .filter((file) => file.toLowerCase().endsWith('.mdx'))
-    .map((file) => file.replace(/\.mdx$/i, ''));
+    .filter((file) => file.toLowerCase().endsWith(".mdx"))
+    .map((file) => file.replace(/\.mdx$/i, ""));
 }
 
 function readPost(slug: string): PostWithContent {
-  const markdown = fs.readFileSync(path.join(postsDirectory, `${slug}.mdx`), 'utf-8');
+  const markdown = fs.readFileSync(path.join(postsDirectory, `${slug}.mdx`), "utf-8");
   const { content, data } = matter(markdown);
   const frontmatter = data as PostFrontmatter;
 
@@ -36,11 +36,11 @@ function readPost(slug: string): PostWithContent {
       .split(/[-_]/)
       .filter(Boolean)
       .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-      .join(' ');
+      .join(" ");
 
   const fallbackTitle = formatTitleFromSlug(slug);
   const normalizedTitle =
-    typeof frontmatter.title === 'string' && frontmatter.title.trim().length > 0
+    typeof frontmatter.title === "string" && frontmatter.title.trim().length > 0
       ? frontmatter.title
       : fallbackTitle;
 

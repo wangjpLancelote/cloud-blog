@@ -1,8 +1,8 @@
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
-export type Locale = 'en' | 'zh';
-export type LocaleChoice = 'auto' | Locale;
+export type Locale = "en" | "zh";
+export type LocaleChoice = "auto" | Locale;
 
 export type LocaleState = {
   choice: LocaleChoice;
@@ -12,13 +12,12 @@ export type LocaleState = {
 export const useLocaleStore = create<LocaleState>()(
   persist(
     (set) => ({
-      choice: 'auto',
+      choice: "auto",
       setChoice: (value) => set({ choice: value }),
     }),
     {
-      name: 'locale-choice',
+      name: "locale-choice",
       storage: createJSONStorage(() => localStorage),
-    },
-  ),
+    }
+  )
 );
-

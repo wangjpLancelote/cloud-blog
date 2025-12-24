@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
-import { createContext, useContext, useEffect, useMemo } from 'react';
-import enDict from '@/i18n/dictionaries/en.json';
-import zhDict from '@/i18n/dictionaries/zh.json';
-import { Locale, LocaleChoice, LocaleState, useLocaleStore } from '@/store/locale';
+import enDict from "@/i18n/dictionaries/en.json";
+import zhDict from "@/i18n/dictionaries/zh.json";
+import type { Locale, LocaleChoice, LocaleState } from "@/store/locale";
+import { useLocaleStore } from "@/store/locale";
+import { createContext, useContext, useEffect, useMemo } from "react";
 
 type I18nContextValue = {
   locale: Locale;
@@ -20,11 +21,11 @@ const dictionaries: Record<Locale, Record<string, string>> = {
 const I18nContext = createContext<I18nContextValue | null>(null);
 
 function resolveLocale(choice: LocaleChoice): Locale {
-  if (choice !== 'auto') return choice;
-  if (typeof navigator === 'undefined') return 'en';
-  const navLang = navigator.language?.toLowerCase() ?? '';
-  if (navLang.startsWith('zh')) return 'zh';
-  return 'en';
+  if (choice !== "auto") return choice;
+  if (typeof navigator === "undefined") return "en";
+  const navLang = navigator.language?.toLowerCase() ?? "";
+  if (navLang.startsWith("zh")) return "zh";
+  return "en";
 }
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
@@ -34,8 +35,8 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   const locale = useMemo(() => resolveLocale(choice), [choice]);
 
   useEffect(() => {
-    if (typeof document === 'undefined') return;
-    document.documentElement.lang = choice === 'auto' ? 'auto' : locale;
+    if (typeof document === "undefined") return;
+    document.documentElement.lang = choice === "auto" ? "auto" : locale;
   }, [choice, locale]);
 
   const messages = useMemo(() => dictionaries[locale], [locale]);
@@ -47,7 +48,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
       setChoice,
       t: (key: string) => messages[key] ?? key,
     }),
-    [locale, choice, messages, setChoice],
+    [locale, choice, messages, setChoice]
   );
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
@@ -55,7 +56,6 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
 
 export function useI18n() {
   const ctx = useContext(I18nContext);
-  if (!ctx) throw new Error('useI18n must be used within I18nProvider');
+  if (!ctx) throw new Error("useI18n must be used within I18nProvider");
   return ctx;
 }
-

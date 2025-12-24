@@ -1,0 +1,5 @@
+{
+  "editor.formatOnSave": false,
+  "biome.enabled": true,
+  "biome.lintOnSave": true
+}
