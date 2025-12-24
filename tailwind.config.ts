@@ -27,10 +27,7 @@ const config: Config = {
       },
     },
   },
-  plugins: {
-    typography,
-    "tailwindcss-animate": animate,
-  },
+  plugins: [typography, animate],
 };
 
 export default config;
