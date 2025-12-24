@@ -36,11 +36,8 @@ const config: Config = {
           "50%": { backgroundPosition: "100% 50%" },
         },
       },
-      spacing: {
-        "2a": "20rem",
-      },
+      spacing: {},
       backgroundImage: {
-        aaa: "linear-gradient(to right top, #2E3192, #662D8C, #ED1E79, #FBB03B)",
         "macos-sonoma-gradient": "linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)",
         "mac-pro-wallpaper": "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
         "ios-gradient":
