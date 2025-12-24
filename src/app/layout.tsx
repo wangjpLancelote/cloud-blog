@@ -22,11 +22,11 @@ export default function RootLayout({
   return (
     <html lang="auto">
       <body className={`${geist.variable} ${geistMono.variable} antialiased `}>
+        <AppToaster />
         <StoreProvider>
           <I18nProvider>
             {children}
             <TranslateSwitcher />
-            <AppToaster />
           </I18nProvider>
         </StoreProvider>
       </body>
