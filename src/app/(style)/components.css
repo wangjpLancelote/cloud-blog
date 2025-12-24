@@ -1,0 +1,64 @@
+@import 'prismjs/themes/prism.css';
+
+[data-rehype-pretty-code-figure] {
+  margin-block: 1.5rem;
+}
+
+[data-rehype-pretty-code-title] {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-family: sans-serif;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border: 1px solid transparent;
+  border-bottom: none;
+}
+
+[data-rehype-pretty-code-figure] > pre {
+  margin-block: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: none;
+}
+
+.line[data-highlighted-line] {
+  background-color: hsla(210, 80%, 60%, 0.15);
+}
+
+html.dark .line[data-highlighted-line] {
+  background-color: hsla(210, 80%, 70%, 0.2);
+}
+
+pre {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+html:not(.dark) pre[data-theme~="light-plus"] {
+  background-color: #f6f8fa;
+  border-color: #e1e4e8;
+}
+
+html.dark pre[data-theme~="laserwave"] {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+html:not(.dark) pre code span {
+  color: var(--shiki-light);
+  background-color: transparent;
+}
+
+html.dark pre code span {
+  color: var(--shiki-dark);
+  background-color: transparent;
+}
+
+pre code span {
+  color: inherit;
+}
+

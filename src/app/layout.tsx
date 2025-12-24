@@ -1,38 +1,13 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import localFont from 'next/font/local'
-
-const geist = localFont({
-  src: [
-    {
-      path: '../../public/fonts/geist/Geist-Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/geist/Geist-Bold.woff2',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-geist',  // 声明一个 CSS 变量
-})
-
-const geistMono = localFont({
-  src: [
-    {
-      path: '../../public/fonts/geist/GeistMono-Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/geist/GeistMono-Bold.woff2',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-geist-mono',  // 声明另一个 CSS 变量
-})
+import "./(style)/tailwind.css";
+import "./(style)/base.css";
+import "./(style)/components.css";
+import "./(style)/utilities.css";
+import { geist, geistMono } from "./(style)/fonts";
+import { AppToaster } from "@/components/ui/toaster";
+import { TranslateSwitcher } from "@/app/(translate)/Translate";
+import { I18nProvider } from "@/app/(translate)/I18nProvider";
+import { StoreProvider } from "@/store/provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -45,11 +20,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geist.variable} ${geistMono.variable} antialiased `}
-      >
-        {children}
+    <html lang="auto">
+      <body className={`${geist.variable} ${geistMono.variable} antialiased `}>
+        <StoreProvider>
+          <I18nProvider>
+            {children}
+            <TranslateSwitcher />
+            <AppToaster />
+          </I18nProvider>
+        </StoreProvider>
       </body>
     </html>
   );

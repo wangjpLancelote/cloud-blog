@@ -1,0 +1,9 @@
+/* Utility layer overrides / helpers */
+@layer utilities {
+  /* Example gradient helper
+  .bg-apple-pro-gradient {
+    background-image: linear-gradient(to right top, #2E3192, #662D8C, #ED1E79, #FBB03B);
+  }
+  */
+}
+
