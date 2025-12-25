@@ -1,5 +1,7 @@
 {
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "biome.enabled": true,
-  "biome.lintOnSave": true
+  "biome.lintOnSave": true,
+  "css.lint.unknownAtRules": "ignore"
 }

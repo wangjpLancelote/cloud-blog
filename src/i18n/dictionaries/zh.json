@@ -2,5 +2,8 @@
   "language": "语言",
   "auto": "自动",
   "english": "英语",
-  "chinese": "中文"
+  "chinese": "中文",
+  "layout": {
+    "title": "我曾寻找钥匙多年，但那扇门一直开着"
+  }
 }

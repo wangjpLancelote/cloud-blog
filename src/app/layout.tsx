@@ -21,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geist.variable} ${geistMono.variable} antialiased `}>
+      <body
+        className={`${geist.variable} ${geistMono.variable} antialiased text-foreground bg-[radial-gradient(circle_at_20%_20%,rgba(245,250,255,0.92),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(190,215,245,0.55),transparent_32%),radial-gradient(circle_at_40%_90%,rgba(220,235,250,0.65),transparent_36%)] bg-slate-50/90`}
+      >
         <AppToaster />
         <StoreProvider>
           <I18nProvider>

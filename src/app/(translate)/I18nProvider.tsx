@@ -13,12 +13,21 @@ type I18nContextValue = {
   t: (key: string) => string;
 };
 
-const dictionaries: Record<Locale, Record<string, string>> = {
+const dictionaries: Record<Locale, Record<string, unknown>> = {
   en: enDict,
   zh: zhDict,
 };
 
 const I18nContext = createContext<I18nContextValue | null>(null);
+
+function getByPath(obj: Record<string, unknown>, path: string) {
+  return path.split(".").reduce<unknown>((acc, key) => {
+    if (acc && typeof acc === "object" && key in acc) {
+      return (acc as Record<string, unknown>)[key];
+    }
+    return undefined;
+  }, obj);
+}
 
 function resolveLocale(choice: LocaleChoice): Locale {
   if (choice !== "auto") return choice;
@@ -46,7 +55,10 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
       locale,
       choice,
       setChoice,
-      t: (key: string) => messages[key] ?? key,
+      t: (key: string) => {
+        const hit = getByPath(messages, key);
+        return typeof hit === "string" ? hit : key;
+      },
     }),
     [locale, choice, messages, setChoice]
   );

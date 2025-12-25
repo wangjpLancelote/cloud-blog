@@ -1,1 +1,80 @@
 @import "tailwindcss";
+
+/* 引入插件 */
+@plugin "@tailwindcss/typography";
+@plugin "tailwindcss-animate";
+
+@theme {
+  /* 基础颜色映射 (指向 base.css 中的变量) */
+  --color-primary: hsl(var(--color-primary));
+  --color-primary-text: hsl(var(--color-primary-text));
+  --color-secondary: hsl(var(--color-secondary));
+  --color-secondary-text: hsl(var(--color-secondary-text));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-text: hsl(var(--destructive-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-text: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-text: hsl(var(--accent-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-text: hsl(var(--popover-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-text: hsl(var(--card-foreground));
+
+  /* 阴影 */
+  --shadow-glass: 0 20px 60px rgba(15, 23, 42, 0.12);
+  --shadow-card: 0 16px 48px rgba(15, 23, 42, 0.14);
+
+  /* 动画 & 关键帧 */
+  --animate-gradient-flow: gradient-flow 15s ease infinite;
+  @keyframes gradient-flow {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /* 背景渐变 */
+  --background-image-macos-sonoma-gradient: linear-gradient(
+    120deg,
+    #84fab0 0%,
+    #8fd3f4 100%
+  );
+  --background-image-mac-pro-wallpaper: linear-gradient(
+    135deg,
+    #0f2027,
+    #203a43,
+    #2c5364
+  );
+  --background-image-ios-gradient: linear-gradient(
+    to right,
+    #ff8177 0%,
+    #ff867a 0%,
+    #ff8c7f 21%,
+    #f99185 52%,
+    #cf556c 78%,
+    #b12a5b 100%
+  );
+  --background-image-mac-glass: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.68) 0%,
+    rgba(255, 255, 255, 0.38) 50%,
+    rgba(255, 255, 255, 0.25) 100%
+  );
+
+  /* 默认过渡时长 */
+  --transition-duration-default: 300ms;
+}
+
+/* 定义复合工具类 (Composite Utility Classes) */
+@utility gap-xs-regular {
+  @apply font-normal text-black text-xs;
+}
