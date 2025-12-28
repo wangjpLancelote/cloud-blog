@@ -1,7 +1,7 @@
 "use client";
 
 import { useI18n } from "@/app/(translate)/I18nProvider";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/cloud-ui/button";
 import { cn } from "@/lib/utils";
 
 const OPTIONS: { value: "auto" | "en" | "zh"; labelKey: string }[] = [

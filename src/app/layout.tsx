@@ -5,7 +5,7 @@ import "./(style)/components.css";
 import "./(style)/utilities.css";
 import { I18nProvider } from "@/app/(translate)/I18nProvider";
 import { TranslateSwitcher } from "@/app/(translate)/Translate";
-import { AppToaster } from "@/components/ui/toaster";
+import { AppToaster } from "@/components/cloud-ui/toaster";
 import { StoreProvider } from "@/store/provider";
 import { geist, geistMono } from "./(style)/fonts";
 
