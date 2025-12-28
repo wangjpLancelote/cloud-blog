@@ -83,6 +83,6 @@
     "typescript": "^5"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm lint:biome -- --since HEAD"
+    "pre-commit": "pnpm lint:biome"
   }
 }
