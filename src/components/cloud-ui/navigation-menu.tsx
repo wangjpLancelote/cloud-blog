@@ -102,7 +102,22 @@ const NavigationMenuContent = React.forwardRef<
 ));
 NavigationMenuContent.displayName = NavigationMenuPrimitive.Content.displayName;
 
-const NavigationMenuLink = NavigationMenuPrimitive.Link;
+// 自定义 NavigationMenuLink 样式
+const NavigationMenuLink = React.forwardRef<
+  React.ElementRef<typeof NavigationMenuPrimitive.Link>,
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Link>
+>(({ className, ...props }, ref) => (
+  <NavigationMenuPrimitive.Link
+    ref={ref}
+    className={cn(
+      // 可以添加自定义样式
+      // "underline-offset-4 hover:underline", // 示例：添加下划线样式
+      className
+    )}
+    {...props}
+  />
+));
+NavigationMenuLink.displayName = NavigationMenuPrimitive.Link.displayName;
 
 // 自定义 NavigationMenuViewport 样式
 const NavigationMenuViewport = React.forwardRef<
