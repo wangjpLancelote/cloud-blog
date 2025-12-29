@@ -20,6 +20,10 @@ const options = {
 
 const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "js", "jsx", "mdx", "md"],
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
 };
 
 const mdx = withMDX({

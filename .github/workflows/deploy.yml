@@ -46,5 +46,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy .next --project-name=lorenzo # 请确保这里与你在 Cloudflare 上的项目名一致
-
+          command: pages deploy out --project-name=lorenzo
