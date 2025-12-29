@@ -5,5 +5,10 @@
   "chinese": "中文",
   "layout": {
     "title": "I have been looking for the key for many years, but the door has been open"
+  },
+  "menu": {
+    "blog": "Blog",
+    "blockchain": "Blockchain",
+    "learning": "Learning"
   }
 }

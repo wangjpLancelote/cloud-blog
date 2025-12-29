@@ -5,5 +5,10 @@
   "chinese": "中文",
   "layout": {
     "title": "我曾寻找钥匙多年，但那扇门一直开着"
+  },
+  "menu": {
+    "blog": "博客",
+    "blockchain": "区块链",
+    "learning": "学习笔记"
   }
 }
