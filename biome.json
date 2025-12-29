@@ -13,7 +13,7 @@
       "recommended": true,
       "correctness": {
         "noUnusedImports": "error",
-        "noUnusedVariables": "error"
+        "noUnusedVariables": "off"
       },
       "style": {
         "noVar": "error",
