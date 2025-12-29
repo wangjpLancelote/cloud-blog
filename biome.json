@@ -17,7 +17,8 @@
       },
       "style": {
         "noVar": "error",
-        "useConst": "error"
+        "useConst": "error",
+        "useNodejsImportProtocol": "off"
       },
       "a11y": {
         "useButtonType": "off"
