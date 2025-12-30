@@ -18,7 +18,11 @@ export async function generateStaticParams() {
   return getAllPostSlugs().map((slug) => ({ slug }));
 }
 
-export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogPost({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const decodedSlug = decodeURIComponent(slug);
   const { content, frontmatter } = getPostContent(decodedSlug);
@@ -26,8 +30,9 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   return (
     <Layout>
       <TitleSync title={frontmatter.title} />
-      <article className="dark:prose-invert prose prose-lg">
+      <article className="dark:prose-invert mx-auto max-w-[90ch] prose prose-lg">
         <h1>{frontmatter.title}</h1>
+        {/* @ts-expect-error next-mdx-remote types unsure in React 19 */}
         <MDXRemote
           source={content}
           components={{ Custom }}

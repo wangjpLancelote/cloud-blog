@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useEffect, useState, useRef, useMemo } from "react";
 import { TranslateSwitcher } from "@/app/(translate)/Translate";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 export function Navigation() {
   const { t } = useI18n();
@@ -67,20 +68,22 @@ export function Navigation() {
   return (
     <nav
       className={cn(
-        "top-0 z-50 sticky flex justify-between items-center bg-white/50 backdrop-blur-md px-6 border-white/20 border-b h-16 transition-all duration-300 shrink-0",
+        "top-0 z-50 sticky flex items-center bg-white/50 backdrop-blur-md px-4 lg:px-6 border-white/20 border-b h-16 transition-all duration-300 shrink-0 gap-4",
         isScrolled ? "shadow-sm border-white/40 bg-white/70" : "shadow-none"
       )}
     >
-      <div className="hidden lg:flex flex-1" />
+      <div className="flex-1 min-w-0 hidden md:flex">
+        <Breadcrumb />
+      </div>
 
       <div
         ref={containerRef}
-        className="relative flex items-center gap-2 bg-black/[0.03] shadow-[inset_0_1px_2px_rgba(0,0,0,0.05)] p-1.5 border border-black/[0.05] rounded-2xl"
+        className="relative flex items-center gap-2 bg-black/3 shadow-[inset_0_1px_2px_rgba(0,0,0,0.05)] p-1.5 border border-black/5 rounded-2xl flex-shrink-0"
       >
         {/* 滑动背景块 */}
         {activeRect && (
           <div
-            className="top-1.5 bottom-1.5 absolute bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] rounded-xl ring-1 ring-black/[0.02] transition-all duration-300 ease-out"
+            className="top-1.5 bottom-1.5 absolute bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] rounded-xl ring-1 ring-black/2 transition-all duration-300 ease-out"
             style={{
               left: activeRect.left,
               width: activeRect.width,
@@ -114,7 +117,10 @@ export function Navigation() {
         })}
       </div>
 
-      <div className="flex flex-1 justify-end">
+      <div className="flex flex-1 justify-end min-w-0">
+        <div className="md:hidden flex-1 min-w-0 mr-2">
+          <Breadcrumb />
+        </div>
         <TranslateSwitcher />
       </div>
     </nav>

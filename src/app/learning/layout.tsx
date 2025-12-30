@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 export default function LearningLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex flex-col mx-auto px-4 lg:px-6 pt-6 pb-12 max-w-5xl min-h-screen">
+    <div className="flex flex-col mx-auto px-4 lg:px-6 pt-6 pb-12 max-w-full sm:max-w-3xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-360 min-h-screen">
       {children}
     </div>
   );

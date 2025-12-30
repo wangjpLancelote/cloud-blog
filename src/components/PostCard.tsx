@@ -28,7 +28,7 @@ export function PostCard({ post }: { post: PostItem }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <Card className="group bg-white/80 shadow-subtle hover:shadow-card backdrop-blur-md border-white/20 overflow-hidden transition-all duration-300">
+    <Card className="group bg-white/80 shadow-subtle hover:shadow-card backdrop-blur-md mx-auto border-white/20 w-full max-w-3xl md:max-w-4xl lg:max-w-5xl overflow-hidden transition-all duration-300">
       <CardHeader
         className="px-5 py-8 cursor-pointer"
         onClick={() => setIsExpanded(!isExpanded)}
