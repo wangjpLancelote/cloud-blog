@@ -34,9 +34,11 @@ export function getAllPostSlugs() {
 }
 
 function readPost(slug: string): PostWithContent {
-  let fullPath = path.join(postsDirectory, `${slug}.mdx`);
+  // 解码 slug，处理中文字符被 URL 编码导致找不到文件的问题
+  const decodedSlug = decodeURIComponent(slug);
+  let fullPath = path.join(postsDirectory, `${decodedSlug}.mdx`);
   if (!fs.existsSync(fullPath)) {
-    fullPath = path.join(postsDirectory, `${slug}.md`);
+    fullPath = path.join(postsDirectory, `${decodedSlug}.md`);
   }
 
   const markdown = fs.readFileSync(fullPath, "utf-8");
@@ -50,7 +52,7 @@ function readPost(slug: string): PostWithContent {
       .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
       .join(" ");
 
-  const fallbackTitle = formatTitleFromSlug(slug);
+  const fallbackTitle = formatTitleFromSlug(decodedSlug);
   const normalizedTitle =
     typeof frontmatter.title === "string" && frontmatter.title.trim().length > 0
       ? frontmatter.title

@@ -20,7 +20,8 @@ export async function generateStaticParams() {
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const { content, frontmatter } = getPostContent(slug);
+  const decodedSlug = decodeURIComponent(slug);
+  const { content, frontmatter } = getPostContent(decodedSlug);
 
   return (
     <Layout>
