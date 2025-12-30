@@ -14,20 +14,32 @@ export type PostFrontmatter = {
 export type PostItem = {
   slug: string;
   frontmatter: PostFrontmatter;
+  summary: string;
 };
 
 export type PostWithContent = PostItem & { content: string };
 
-// 读取所有 mdx 文件名作为 slug
+// 读取所有 md 或 mdx 文件名作为 slug，并进行去重
 export function getAllPostSlugs() {
-  return fs
-    .readdirSync(postsDirectory)
-    .filter((file) => file.toLowerCase().endsWith(".mdx"))
-    .map((file) => file.replace(/\.mdx$/i, ""));
+  const files = fs.readdirSync(postsDirectory);
+  const slugs = files
+    .filter((file) => {
+      const lower = file.toLowerCase();
+      return lower.endsWith(".mdx") || lower.endsWith(".md");
+    })
+    .map((file) => file.replace(/\.mdx?$/i, ""));
+
+  // 使用 Set 去重
+  return Array.from(new Set(slugs));
 }
 
 function readPost(slug: string): PostWithContent {
-  const markdown = fs.readFileSync(path.join(postsDirectory, `${slug}.mdx`), "utf-8");
+  let fullPath = path.join(postsDirectory, `${slug}.mdx`);
+  if (!fs.existsSync(fullPath)) {
+    fullPath = path.join(postsDirectory, `${slug}.md`);
+  }
+
+  const markdown = fs.readFileSync(fullPath, "utf-8");
   const { content, data } = matter(markdown);
   const frontmatter = data as PostFrontmatter;
 
@@ -44,17 +56,28 @@ function readPost(slug: string): PostWithContent {
       ? frontmatter.title
       : fallbackTitle;
 
+  // 生成摘要：优先使用 description，否则截取内容前 150 个字符
+  const summary =
+    typeof frontmatter.description === "string" &&
+    frontmatter.description.trim().length > 0
+      ? frontmatter.description
+      : `${content
+          .replace(/[#*`]/g, "") // 移除简单的 markdown 符号
+          .substring(0, 150)
+          .trim()}...`;
+
   return {
     slug,
     content,
+    summary,
     frontmatter: { ...frontmatter, title: normalizedTitle },
   };
 }
 
 export function getAllPosts(): PostItem[] {
   return getAllPostSlugs().map((slug) => {
-    const { frontmatter } = readPost(slug);
-    return { slug, frontmatter };
+    const { frontmatter, summary } = readPost(slug);
+    return { slug, frontmatter, summary };
   });
 }
 

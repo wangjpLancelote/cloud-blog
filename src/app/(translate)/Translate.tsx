@@ -5,6 +5,10 @@ import { Button } from "@/components/cloud-ui/button";
 import { cn } from "@/lib/utils";
 import { useState, useRef, useEffect } from "react";
 import { Globe } from "lucide-react";
+import type { ComponentType } from "react";
+
+// 修复 React 19 下 Lucide 图标的类型兼容性问题
+const IconGlobe = Globe as unknown as ComponentType<{ className?: string }>;
 
 const OPTIONS: { value: "auto" | "en" | "zh"; labelKey: string }[] = [
   { value: "auto", labelKey: "auto" },
@@ -19,7 +23,10 @@ export function TranslateSwitcher() {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -38,15 +45,15 @@ export function TranslateSwitcher() {
   return (
     <div className="relative" ref={dropdownRef}>
       {/* Desktop Version */}
-      <div className="hidden lg:flex items-center gap-1 bg-black/[0.03] p-1 rounded-xl border border-black/[0.05]">
+      <div className="hidden lg:flex items-center gap-1 bg-black/3 p-1 border border-black/5 rounded-xl">
         {OPTIONS.map((opt) => (
           <button
             key={opt.value}
             onClick={() => setChoice(opt.value)}
             className={cn(
-              "px-3 py-1.5 rounded-lg text-xs font-medium transition-all whitespace-nowrap",
+              "px-3 py-1.5 rounded-lg font-medium text-xs whitespace-nowrap transition-all",
               opt.value === choice
-                ? "bg-white text-foreground shadow-sm ring-1 ring-black/[0.02]"
+                ? "bg-white text-foreground shadow-sm ring-1 ring-black/2"
                 : "text-muted-text hover:text-foreground hover:bg-white/40"
             )}
           >
@@ -60,14 +67,14 @@ export function TranslateSwitcher() {
         <Button
           variant="ghost"
           size="sm"
-          className="h-9 w-9 p-0 rounded-xl bg-black/[0.03] hover:bg-black/[0.06]"
+          className="bg-black/3 hover:bg-black/6 p-0 rounded-xl w-9 h-9"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <Globe className="h-4 w-4" />
+          <IconGlobe className="w-4 h-4" />
         </Button>
 
         {isOpen && (
-          <div className="absolute right-0 mt-2 w-48 py-1 bg-white rounded-xl shadow-glass border border-black/[0.05] z-[60] animate-in fade-in zoom-in duration-200">
+          <div className="right-0 z-60 absolute bg-white shadow-glass mt-2 py-1 border border-black/5 rounded-xl w-48 animate-in duration-200 fade-in zoom-in">
             {OPTIONS.map((opt) => (
               <button
                 key={opt.value}
@@ -76,10 +83,10 @@ export function TranslateSwitcher() {
                   setIsOpen(false);
                 }}
                 className={cn(
-                  "w-full text-left px-4 py-2 text-sm transition-colors",
+                  "px-4 py-2 w-full text-sm text-left transition-colors",
                   opt.value === choice
                     ? "text-primary bg-primary/5 font-medium"
-                    : "text-muted-text hover:bg-black/[0.02] hover:text-foreground"
+                    : "text-muted-text hover:bg-black/2 hover:text-foreground"
                 )}
               >
                 {getLabel(opt)}

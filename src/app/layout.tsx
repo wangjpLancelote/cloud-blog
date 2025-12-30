@@ -8,6 +8,7 @@ import { AppToaster } from "@/components/cloud-ui/toaster";
 import { StoreProvider } from "@/store/provider";
 import { geist, geistMono } from "./(style)/fonts";
 import { Navigation } from "@/components/Navigation";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -29,6 +30,9 @@ export default function RootLayout({
           <I18nProvider>
             <Navigation />
             <main className="flex-1 overflow-x-hidden overflow-y-auto">
+              <div className="mx-auto px-4 lg:px-6 max-w-5xl">
+                <Breadcrumb />
+              </div>
               {children}
             </main>
             {/* Deploy Test Mark: ${new Date().toISOString()} - Final Verification to Pages */}

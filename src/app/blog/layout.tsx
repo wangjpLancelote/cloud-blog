@@ -17,9 +17,7 @@ export default function BlogLayout({ children }: { children: ReactNode }) {
       </header>
 
       <main className="flex-1 mt-8">
-        <div className="bg-white backdrop-blur border rounded-2xl">
-          {children}
-        </div>
+        {children}
       </main>
     </div>
   );

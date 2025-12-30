@@ -10,5 +10,8 @@
     "blog": "Blog",
     "blockchain": "Blockchain",
     "learning": "Learning"
+  },
+  "breadcrumb": {
+    "home": "Home"
   }
 }
