@@ -5,6 +5,13 @@ import rehypePrettyCode from "rehype-pretty-code";
 import Custom from "../../../components/Custom";
 import Layout from "../../../components/Layout";
 import { TitleSync } from "@/components/TitleSync";
+import type { ComponentType } from "react";
+
+type MDXProps = {
+  source: string;
+  components?: Record<string, unknown>;
+  options?: unknown;
+};
 
 const options = {
   theme: {
@@ -27,13 +34,15 @@ export default async function BlogPost({
   const decodedSlug = decodeURIComponent(slug);
   const { content, frontmatter } = getPostContent(decodedSlug);
 
+  // 强制类型兼容，避免 React 19 下 async 组件类型检查失败
+  const MDXRemoteComponent = MDXRemote as unknown as ComponentType<MDXProps>;
+
   return (
     <Layout>
       <TitleSync title={frontmatter.title} />
       <article className="dark:prose-invert mx-auto max-w-[90ch] prose prose-lg">
         <h1>{frontmatter.title}</h1>
-        {/* @ts-expect-error next-mdx-remote typing is not aligned with React 19 */}
-        <MDXRemote
+        <MDXRemoteComponent
           source={content}
           components={{ Custom }}
           options={{

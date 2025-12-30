@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:biome": "biome lint .",
+    "lint:biome:changed": "biome lint --changed",
     "test": "vitest run",
     "prepare": "simple-git-hooks"
   },
@@ -89,6 +90,6 @@
     "typescript": "^5"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm lint:biome"
+    "pre-commit": "pnpm lint:biome:changed"
   }
 }
