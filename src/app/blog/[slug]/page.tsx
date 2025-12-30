@@ -32,7 +32,7 @@ export default async function BlogPost({
       <TitleSync title={frontmatter.title} />
       <article className="dark:prose-invert mx-auto max-w-[90ch] prose prose-lg">
         <h1>{frontmatter.title}</h1>
-        {/* @ts-expect-error next-mdx-remote types unsure in React 19 */}
+        {/* @ts-expect-error next-mdx-remote typing is not aligned with React 19 */}
         <MDXRemote
           source={content}
           components={{ Custom }}
