@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import {
   Card,
@@ -8,13 +6,12 @@ import {
   CardContent,
 } from "@/components/cloud-ui/card";
 import { BookOpen } from "lucide-react";
-import type { PostItem } from "@/lib/posts";
 import type { ComponentType } from "react";
 
-// 修复 React 19 下 Lucide 图标的类型兼容性问题
 const IconBookOpen = BookOpen as unknown as ComponentType<{
   className?: string;
 }>;
+import type { PostItem } from "@/lib/posts";
 
 export function PostCard({ post }: { post: PostItem }) {
   return (
@@ -22,7 +19,7 @@ export function PostCard({ post }: { post: PostItem }) {
       href={`/blog/${post.slug}`}
       className="group block mx-auto w-full max-w-3xl md:max-w-4xl lg:max-w-5xl"
     >
-      <Card className="bg-white/80 shadow-subtle hover:shadow-card backdrop-blur-md border-white/20 overflow-hidden transition-all duration-300 cursor-pointer">
+      <Card className="bg-white/90 shadow-subtle hover:shadow-card border-white/20 overflow-hidden transition-shadow duration-200 cursor-pointer">
         <CardHeader className="px-5 py-6">
           <div className="flex items-center gap-3 overflow-hidden">
             <CardTitle className="group-hover:text-primary text-lg truncate transition-colors">
