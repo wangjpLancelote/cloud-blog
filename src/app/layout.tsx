@@ -9,6 +9,7 @@ import { StoreProvider } from "@/store/provider";
 import { geist, geistMono } from "./(style)/fonts";
 import { Navigation } from "@/components/Navigation";
 import { SiteBanner } from "@/components/SiteBanner";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -29,7 +30,11 @@ export default function RootLayout({
         <StoreProvider>
           <I18nProvider>
             <Navigation />
-            <main className="flex-1 overflow-x-hidden overflow-y-auto">
+            <main
+              id="app-main"
+              className="flex-1 overflow-x-hidden overflow-y-auto"
+            >
+              <ScrollToTop />
               <SiteBanner />
               {children}
             </main>
