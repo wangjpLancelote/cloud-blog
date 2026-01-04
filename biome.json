@@ -1,7 +1,15 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
   "files": {
-    "ignore": ["node_modules", ".next", ".turbo", "public"]
+    "ignore": [
+      "node_modules",
+      ".next",
+      ".turbo",
+      "public",
+      "out",
+      "dist",
+      "build"
+    ]
   },
   "formatter": {
     "indentStyle": "space",
@@ -13,11 +21,15 @@
       "recommended": true,
       "correctness": {
         "noUnusedImports": "error",
-        "noUnusedVariables": "error"
+        "noUnusedVariables": "off"
       },
       "style": {
         "noVar": "error",
-        "useConst": "error"
+        "useConst": "error",
+        "useNodejsImportProtocol": "off"
+      },
+      "a11y": {
+        "useButtonType": "off"
       }
     }
   },

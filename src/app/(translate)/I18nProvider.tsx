@@ -32,8 +32,16 @@ function getByPath(obj: Record<string, unknown>, path: string) {
 function resolveLocale(choice: LocaleChoice): Locale {
   if (choice !== "auto") return choice;
   if (typeof navigator === "undefined") return "en";
-  const navLang = navigator.language?.toLowerCase() ?? "";
-  if (navLang.startsWith("zh")) return "zh";
+
+  // 优先从 navigator.languages 获取偏好列表，否则使用 navigator.language
+  const systemLangs = navigator.languages || [navigator.language];
+
+  for (const lang of systemLangs) {
+    const lowerLang = lang.toLowerCase();
+    if (lowerLang.startsWith("zh")) return "zh";
+    if (lowerLang.startsWith("en")) return "en";
+  }
+
   return "en";
 }
 
