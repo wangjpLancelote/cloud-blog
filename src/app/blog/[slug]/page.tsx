@@ -5,6 +5,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import Custom from "../../../components/Custom";
 import Layout from "../../../components/Layout";
 import { TitleSync } from "@/components/TitleSync";
+import { mdxComponents } from "@/lib/mdx-components";
 import type { ComponentType } from "react";
 
 type MDXProps = {
@@ -34,6 +35,7 @@ export default async function BlogPost({
   const { slug } = await params;
   const decodedSlug = decodeURIComponent(slug);
   const { content, frontmatter } = getPostContent(decodedSlug);
+  const components = { Custom, ...mdxComponents };
 
   // 强制类型兼容，避免 React 19 下 async 组件类型检查失败
   const MDXRemoteComponent = MDXRemote as unknown as ComponentType<MDXProps>;
@@ -45,7 +47,7 @@ export default async function BlogPost({
         <h1 className="wrap-break-word hyphens-auto">{frontmatter.title}</h1>
         <MDXRemoteComponent
           source={content}
-          components={{ Custom }}
+          components={components}
           options={{
             mdxOptions: {
               remarkPlugins: [],
