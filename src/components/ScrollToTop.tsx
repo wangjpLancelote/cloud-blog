@@ -74,6 +74,8 @@ export function ScrollToTop() {
         strokeWidth={2.5}
         stroke="currentColor"
         className="h-6 w-6"
+        aria-hidden="true"
+        role="img"
       >
         <path
           strokeLinecap="round"
