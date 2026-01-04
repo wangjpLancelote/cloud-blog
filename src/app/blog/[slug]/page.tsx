@@ -22,7 +22,8 @@ const options = {
 };
 
 export async function generateStaticParams() {
-  return getAllPostSlugs().map((slug) => ({ slug }));
+  // Next.js static export 需要 URL 编码的 slug，以避免中文等特殊字符缺失
+  return getAllPostSlugs().map((slug) => ({ slug: encodeURIComponent(slug) }));
 }
 
 export default async function BlogPost({
@@ -41,7 +42,7 @@ export default async function BlogPost({
     <Layout>
       <TitleSync title={frontmatter.title} />
       <article className="dark:prose-invert mx-auto max-w-[90ch] prose prose-lg">
-        <h1>{frontmatter.title}</h1>
+        <h1 className="wrap-break-word hyphens-auto">{frontmatter.title}</h1>
         <MDXRemoteComponent
           source={content}
           components={{ Custom }}

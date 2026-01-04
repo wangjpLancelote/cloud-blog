@@ -7,13 +7,17 @@ import {
 } from "@/components/cloud-ui/card";
 import { BookOpen } from "lucide-react";
 import type { ComponentType } from "react";
+import type { PostItem } from "@/lib/posts";
 
 const IconBookOpen = BookOpen as unknown as ComponentType<{
   className?: string;
 }>;
-import type { PostItem } from "@/lib/posts";
 
 export function PostCard({ post }: { post: PostItem }) {
+  const displayTitle = post.category
+    ? `[${post.category}/${post.frontmatter.title}]`
+    : post.frontmatter.title;
+
   return (
     <Link
       href={`/blog/${post.slug}`}
@@ -23,7 +27,7 @@ export function PostCard({ post }: { post: PostItem }) {
         <CardHeader className="px-5 py-6">
           <div className="flex items-center gap-3 overflow-hidden">
             <CardTitle className="group-hover:text-primary text-lg truncate transition-colors">
-              {post.frontmatter.title}
+              {displayTitle}
             </CardTitle>
             {post.frontmatter.date && (
               <span className="text-muted-text text-xs whitespace-nowrap shrink-0">

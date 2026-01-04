@@ -1,8 +1,9 @@
-import { getAllPosts } from "@/lib/posts";
-import { PostCard } from "@/components/PostCard";
+import { getAllPosts, getAllCategories } from "@/lib/posts";
+import { BlogList } from "@/components/BlogList";
 
 export default async function BlogIndex() {
   const posts = getAllPosts();
+  const categories = getAllCategories();
 
   // 按日期排序（如果有的话）
   const sortedPosts = posts.sort((a, b) => {
@@ -15,11 +16,5 @@ export default async function BlogIndex() {
     return 0;
   });
 
-  return (
-    <div className="gap-6 grid py-6">
-      {sortedPosts.map((post) => (
-        <PostCard key={post.slug} post={post} />
-      ))}
-    </div>
-  );
+  return <BlogList posts={sortedPosts} categories={categories} />;
 }
