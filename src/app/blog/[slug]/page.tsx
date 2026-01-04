@@ -6,6 +6,7 @@ import Custom from "../../../components/Custom";
 import Layout from "../../../components/Layout";
 import { TitleSync } from "@/components/TitleSync";
 import { mdxComponents } from "@/lib/mdx-components";
+import { ScrollToTopOnMount } from "@/components/ScrollToTopOnMount";
 import type { ComponentType } from "react";
 
 type MDXProps = {
@@ -42,6 +43,7 @@ export default async function BlogPost({
 
   return (
     <Layout>
+      <ScrollToTopOnMount />
       <TitleSync title={frontmatter.title} />
       <article className="dark:prose-invert mx-auto max-w-[90ch] prose prose-lg">
         <h1 className="wrap-break-word hyphens-auto">{frontmatter.title}</h1>
