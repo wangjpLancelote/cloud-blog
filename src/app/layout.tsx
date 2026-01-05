@@ -36,7 +36,6 @@ export default function RootLayout({
               <SiteBanner />
               {children}
             </main>
-            {/* Deploy Test Mark: ${new Date().toISOString()} - Final Verification to Pages */}
           </I18nProvider>
         </StoreProvider>
       </body>
