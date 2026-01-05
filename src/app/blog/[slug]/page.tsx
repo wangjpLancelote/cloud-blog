@@ -45,7 +45,7 @@ export default async function BlogPost({
     <Layout>
       <ScrollToTopOnMount />
       <TitleSync title={frontmatter.title} />
-      <article className="dark:prose-invert mx-auto max-w-[90ch] prose prose-lg">
+      <article className="dark:prose-invert mx-auto w-full max-w-4xl md:max-w-5xl lg:max-w-5xl xl:max-w-6xl prose prose-lg">
         <h1 className="wrap-break-word hyphens-auto">{frontmatter.title}</h1>
         <MDXRemoteComponent
           source={content}
