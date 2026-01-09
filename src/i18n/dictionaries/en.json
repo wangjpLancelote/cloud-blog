@@ -9,7 +9,9 @@
   "menu": {
     "blog": "Blog",
     "blockchain": "Blockchain",
-    "learning": "Learning"
+    "learning": "Learning",
+    "friends": "Links",
+    "friendsEmpty": "No links yet"
   },
   "breadcrumb": {
     "home": "Home"

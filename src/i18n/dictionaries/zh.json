@@ -9,7 +9,9 @@
   "menu": {
     "blog": "博客",
     "blockchain": "区块链",
-    "learning": "学习笔记"
+    "learning": "学习笔记",
+    "friends": "友链",
+    "friendsEmpty": "暂无友链"
   },
   "breadcrumb": {
     "home": "首页"

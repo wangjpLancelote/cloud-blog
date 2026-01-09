@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState, useRef, useMemo } from "react";
 import { TranslateSwitcher } from "@/app/(translate)/Translate";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { FriendLinksDropdown } from "@/components/FriendLinksDropdown";
 
 export function Navigation() {
   const { t } = useI18n();
@@ -68,17 +69,17 @@ export function Navigation() {
   return (
     <nav
       className={cn(
-        "top-0 z-50 sticky flex items-center bg-white/50 backdrop-blur-md px-4 lg:px-6 border-white/20 border-b h-16 transition-all duration-300 shrink-0 gap-4",
+        "top-0 z-50 sticky flex items-center gap-4 bg-white/50 backdrop-blur-md px-4 lg:px-6 border-white/20 border-b h-16 transition-all duration-300 shrink-0",
         isScrolled ? "shadow-sm border-white/40 bg-white/70" : "shadow-none"
       )}
     >
-      <div className="flex-1 min-w-0 hidden md:flex">
+      <div className="hidden md:flex flex-1 min-w-0">
         <Breadcrumb />
       </div>
 
       <div
         ref={containerRef}
-        className="relative flex items-center gap-2 bg-black/3 shadow-[inset_0_1px_2px_rgba(0,0,0,0.05)] p-1.5 border border-black/5 rounded-2xl flex-shrink-0"
+        className="relative flex items-center gap-2 bg-black/3 shadow-[inset_0_1px_2px_rgba(0,0,0,0.05)] p-1.5 border border-black/5 rounded-2xl shrink-0"
       >
         {/* 滑动背景块 */}
         {activeRect && (
@@ -118,10 +119,13 @@ export function Navigation() {
       </div>
 
       <div className="flex flex-1 justify-end min-w-0">
-        <div className="md:hidden flex-1 min-w-0 mr-2">
+        <div className="md:hidden flex-1 mr-2 min-w-0">
           <Breadcrumb />
         </div>
-        <TranslateSwitcher />
+        <div className="flex items-center gap-2">
+          <FriendLinksDropdown />
+          <TranslateSwitcher />
+        </div>
       </div>
     </nav>
   );
