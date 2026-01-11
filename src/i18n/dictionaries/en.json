@@ -11,7 +11,8 @@
     "blockchain": "Blockchain",
     "learning": "Learning",
     "friends": "Links",
-    "friendsEmpty": "No links yet"
+    "friendsEmpty": "No links yet",
+    "navigation": "Navigation"
   },
   "breadcrumb": {
     "home": "Home"

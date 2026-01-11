@@ -8,11 +8,25 @@ import { useEffect, useState, useRef, useMemo } from "react";
 import { TranslateSwitcher } from "@/app/(translate)/Translate";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { FriendLinksDropdown } from "@/components/FriendLinksDropdown";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
+import type { ComponentType } from "react";
+
+// Fix React 19 Lucide icon type compatibility
+const IconMenu = Menu as unknown as ComponentType<{ className?: string }>;
 
 export function Navigation() {
   const { t } = useI18n();
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [activeRect, setActiveRect] = useState<{
     left: number;
     width: number;
@@ -73,13 +87,15 @@ export function Navigation() {
         isScrolled ? "shadow-sm border-white/40 bg-white/70" : "shadow-none"
       )}
     >
+      {/* 桌面端面包屑 */}
       <div className="hidden md:flex flex-1 min-w-0">
         <Breadcrumb />
       </div>
 
+      {/* 桌面端导航 tab - 在移动端隐藏 */}
       <div
         ref={containerRef}
-        className="relative flex items-center gap-2 bg-black/3 shadow-[inset_0_1px_2px_rgba(0,0,0,0.05)] p-1.5 border border-black/5 rounded-2xl shrink-0"
+        className="hidden md:flex relative items-center gap-2 bg-black/3 shadow-[inset_0_1px_2px_rgba(0,0,0,0.05)] p-1.5 border border-black/5 rounded-2xl shrink-0"
       >
         {/* 滑动背景块 */}
         {activeRect && (
@@ -118,13 +134,62 @@ export function Navigation() {
         })}
       </div>
 
+      {/* 右侧区域 */}
       <div className="flex flex-1 justify-end min-w-0">
+        {/* 移动端面包屑 */}
         <div className="md:hidden flex-1 mr-2 min-w-0">
           <Breadcrumb />
         </div>
+        
+        {/* 语言切换和友链 */}
         <div className="flex items-center gap-2">
           <FriendLinksDropdown />
           <TranslateSwitcher />
+          
+          {/* 移动端菜单按钮 */}
+          <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="md:hidden bg-black/3 hover:bg-black/6 p-0 rounded-xl w-9 h-9"
+                aria-label="打开菜单"
+              >
+                <IconMenu className="w-4 h-4" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-72 bg-white/98 backdrop-blur-xl border-l border-black/5">
+              <SheetHeader>
+                <SheetTitle className="text-left text-foreground/80">{t("menu.navigation")}</SheetTitle>
+              </SheetHeader>
+              <nav className="mt-8 flex flex-col gap-1">
+                {navItems.map((item, index) => {
+                  const isActive = pathname.startsWith(item.href);
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setIsDrawerOpen(false)}
+                      className={cn(
+                        "flex items-center px-4 py-3.5 rounded-xl font-medium text-base transition-all duration-200",
+                        "animate-in fade-in slide-in-from-right-4",
+                        isActive
+                          ? "bg-primary/10 text-primary shadow-sm"
+                          : "text-muted-text hover:bg-black/5 hover:text-foreground active:scale-[0.98]"
+                      )}
+                      style={{
+                        animationDelay: `${80 + index * 60}ms`,
+                        animationDuration: "350ms",
+                        animationFillMode: "backwards",
+                      }}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </nav>

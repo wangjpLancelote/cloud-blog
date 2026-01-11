@@ -16,6 +16,7 @@ export type PostItem = {
   frontmatter: PostFrontmatter;
   summary: string;
   category?: string;
+  wordCount: number;
 };
 
 export type PostWithContent = PostItem & { content: string };
@@ -94,23 +95,34 @@ function readPost(slug: string): PostWithContent {
           .substring(0, 150)
           .trim()}...`;
 
+  // 计算字数：移除 markdown 语法后统计
+  const plainText = content
+    .replace(/```[\s\S]*?```/g, "") // 移除代码块
+    .replace(/`[^`]*`/g, "") // 移除行内代码
+    .replace(/!?\[.*?\]\(.*?\)/g, "") // 移除链接和图片
+    .replace(/[#*_~>`]/g, "") // 移除 markdown 符号
+    .replace(/\s+/g, ""); // 移除空白字符
+  const wordCount = plainText.length;
+
   return {
     slug: entry.slug,
     category: entry.category,
     content,
     summary,
+    wordCount,
     frontmatter: { ...frontmatter, title: normalizedTitle },
   };
 }
 
 export function getAllPosts(): PostItem[] {
   return walkPosts().map((entry) => {
-    const { frontmatter, summary } = readPost(entry.slug);
+    const { frontmatter, summary, wordCount } = readPost(entry.slug);
     return {
       slug: entry.slug,
       category: entry.category,
       frontmatter,
       summary,
+      wordCount,
     };
   });
 }

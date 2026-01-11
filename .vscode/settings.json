@@ -11,7 +11,7 @@
     "other": "off"
   },
   "editor.suggestOnTriggerCharacters": false,
-  "editor.wordBasedSuggestions": false,
+  "editor.wordBasedSuggestions": "off",
   "editor.parameterHints.enabled": false,
   "[mdx]": {
     "editor.inlineSuggest.enabled": false,

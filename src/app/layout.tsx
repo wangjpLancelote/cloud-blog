@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./(style)/tailwind.css";
 import "./(style)/base.css";
 import "./(style)/components.css";
@@ -9,6 +9,10 @@ import { StoreProvider } from "@/store/provider";
 import { geist, geistMono } from "./(style)/fonts";
 import { Navigation } from "@/components/Navigation";
 import { SiteBanner } from "@/components/SiteBanner";
+
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
+};
 
 export const metadata: Metadata = {
   title: {
@@ -35,7 +39,6 @@ export const metadata: Metadata = {
     { rel: "icon", url: "/favicon.ico" },
     { rel: "apple-touch-icon", url: "/apple-touch-icon.png" },
   ],
-  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
