@@ -1,0 +1,237 @@
+- generic [active] [ref=f3e1]:
+  - region "Notifications alt+T"
+  - navigation [ref=f3e2]:
+    - navigation [ref=f3e4]:
+      - link [ref=f3e5] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f3e9]: 博客
+    - generic [ref=f3e13]:
+      - link "博客" [ref=f3e15] [cursor=pointer]:
+        - /url: /blog
+      - link "区块链" [ref=f3e17] [cursor=pointer]:
+        - /url: /blockchain
+      - link "学习笔记" [ref=f3e20] [cursor=pointer]:
+        - /url: /learning
+    - generic [ref=f3e24]:
+      - button "友链" [ref=f3e27]
+      - generic [ref=f3e32]:
+        - button "自动 (中文)" [ref=f3e33]
+        - button "英语" [ref=f3e34]
+        - button "中文" [ref=f3e35]
+  - main [ref=f3e36]:
+    - generic [ref=f3e39]:
+      - generic:
+        - heading "我曾寻找钥匙多年，但那扇门一直开着" [level=1]
+    - main [ref=f3e42]:
+      - generic [ref=f3e43]:
+        - tablist [ref=f3e44]:
+          - tab "All (17)" [selected] [ref=f3e45] [cursor=pointer]:
+            - generic [ref=f3e46]: All
+            - generic [ref=f3e47]: (17)
+          - tab "Frontend (5)" [ref=f3e48] [cursor=pointer]:
+            - generic [ref=f3e49]: Frontend
+            - generic [ref=f3e50]: (5)
+          - tab "Thoughts (1)" [ref=f3e51] [cursor=pointer]:
+            - generic [ref=f3e52]: Thoughts
+            - generic [ref=f3e53]: (1)
+        - generic [ref=f3e54]:
+          - link [ref=f3e55] [cursor=pointer]:
+            - /url: /blog/Contract
+            - generic [ref=f3e56]:
+              - generic [ref=f3e59]:
+                - heading "永续合约" [level=3] [ref=f3e60]
+                - generic [ref=f3e61]:
+                  - generic [ref=f3e62]: 2026-08-05
+                  - generic [ref=f3e65]: 3847字
+              - generic [ref=f3e69]:
+                - text: 永续合约已经成为了加密货币交易量最大的交易方式，但永续合约是一个币圈独创的产品，与平时接触的普通金融衍生品不同，币圈永续合约的设计理解起来有点困难，甚至很多人虽然经常用永续合约，但依然不知道各种指标是什么意思。 很多人爆仓，是因为不能理解币圈永续合约的本质。 永续合约的全称，叫做「期货永续合...
+                - generic [ref=f3e70]: 阅读全文
+          - link [ref=f3e73] [cursor=pointer]:
+            - /url: /blog/DeFi
+            - generic [ref=f3e74]:
+              - generic [ref=f3e77]:
+                - heading "DeFi(去中心化金融)" [level=3] [ref=f3e78]
+                - generic [ref=f3e79]:
+                  - generic [ref=f3e80]: 2026-08-05
+                  - generic [ref=f3e83]: 1897字
+              - generic [ref=f3e87]:
+                - text: 流动性挖矿 什么是挖矿？ 最初在区块链中的挖矿是指使用计算机硬件（如 CPU、GPU 或专业的 ASIC 矿机）来执行特定的算法计算，以验证和记录区块链网络中的交易，这个过程对于维护区块链的安全性和去中心化至关重要。 区块链挖矿主要包括以下几个方面： - 交易验证：矿工通过解决复杂的数学...
+                - generic [ref=f3e88]: 阅读全文
+          - link "Frontend Element-UI组件解析 2026-08-05 1937字 <aside> 💡 组件上层封装基本上都是基于已有的UI组件库或者是结合一些前端框架开进行的，如利用ElementUI或者antd进行二次开发，利用Vue/React等前端框架，结合一下UI库如TailwindCSS进行UI修饰，完成封装 </aside> ElementUI：Form 组件... 阅读全文" [ref=f3e91] [cursor=pointer]:
+            - /url: /blog/Element-UI组件解析
+            - generic [ref=f3e92]:
+              - generic [ref=f3e93]:
+                - generic [ref=f3e94]: Frontend
+                - generic [ref=f3e96]:
+                  - heading "Element-UI组件解析" [level=3] [ref=f3e97]
+                  - generic [ref=f3e98]:
+                    - generic [ref=f3e99]: 2026-08-05
+                    - generic [ref=f3e102]: 1937字
+              - generic [ref=f3e106]:
+                - text: <aside> 💡 组件上层封装基本上都是基于已有的UI组件库或者是结合一些前端框架开进行的，如利用ElementUI或者antd进行二次开发，利用Vue/React等前端框架，结合一下UI库如TailwindCSS进行UI修饰，完成封装 </aside> ElementUI：Form 组件...
+                - generic [ref=f3e107]: 阅读全文
+          - link "Frontend React Server Component 2026-08-05 1591字 什么是 RSC react server component 是 react 推出的服务端组件，顾名思义，服务端组件是运行在服务端的 react 组件，所以要想开发并使用服务端组件，需要先启动一个 node 服务 RSC 和 SSR 不是一个东西 服务端组件不能使用客户端的一切变量和方法... 阅读全文" [ref=f3e110] [cursor=pointer]:
+            - /url: /blog/ReactServerComponent
+            - generic [ref=f3e111]:
+              - generic [ref=f3e112]:
+                - generic [ref=f3e113]: Frontend
+                - generic [ref=f3e115]:
+                  - heading "React Server Component" [level=3] [ref=f3e116]
+                  - generic [ref=f3e117]:
+                    - generic [ref=f3e118]: 2026-08-05
+                    - generic [ref=f3e121]: 1591字
+              - generic [ref=f3e125]:
+                - text: 什么是 RSC react server component 是 react 推出的服务端组件，顾名思义，服务端组件是运行在服务端的 react 组件，所以要想开发并使用服务端组件，需要先启动一个 node 服务 RSC 和 SSR 不是一个东西 服务端组件不能使用客户端的一切变量和方法...
+                - generic [ref=f3e126]: 阅读全文
+          - link "Frontend Recoil解决了什么问题 2026-08-05 6字 Recoil... 阅读全文" [ref=f3e129] [cursor=pointer]:
+            - /url: /blog/Recoli
+            - generic [ref=f3e130]:
+              - generic [ref=f3e131]:
+                - generic [ref=f3e132]: Frontend
+                - generic [ref=f3e134]:
+                  - heading "Recoil解决了什么问题" [level=3] [ref=f3e135]
+                  - generic [ref=f3e136]:
+                    - generic [ref=f3e137]: 2026-08-05
+                    - generic [ref=f3e140]: 6字
+              - generic [ref=f3e144]:
+                - text: Recoil...
+                - generic [ref=f3e145]: 阅读全文
+          - link "Frontend Redux-Middleware 2026-08-05 509字 Redux-Middleware 解析 <aside> 💡 It provides a third-party extension point between dispatching an action, and the moment it reaches the reducer. </a... 阅读全文" [ref=f3e148] [cursor=pointer]:
+            - /url: /blog/Redux-middleware
+            - generic [ref=f3e149]:
+              - generic [ref=f3e150]:
+                - generic [ref=f3e151]: Frontend
+                - generic [ref=f3e153]:
+                  - heading "Redux-Middleware" [level=3] [ref=f3e154]
+                  - generic [ref=f3e155]:
+                    - generic [ref=f3e156]: 2026-08-05
+                    - generic [ref=f3e159]: 509字
+              - generic [ref=f3e163]:
+                - text: Redux-Middleware 解析 <aside> 💡 It provides a third-party extension point between dispatching an action, and the moment it reaches the reducer. </a...
+                - generic [ref=f3e164]: 阅读全文
+          - link "Frontend 前端项目部署 2026-08-05 2707字 大公司如何开发部署前端代码 > 多人协作模式下的前端代码开发、超大流量访问下的前端应用的部署 - 多人协作开发 这个比较基础、主要是代码管理方面，使用 git 或者 svn，按照一定的 flow，如从 dev 分支下切新分支进行开发、开发完成之后提测，发起合并请求，合并到测试分支，当测试... 阅读全文" [ref=f3e167] [cursor=pointer]:
+            - /url: /blog/前端部署
+            - generic [ref=f3e168]:
+              - generic [ref=f3e169]:
+                - generic [ref=f3e170]: Frontend
+                - generic [ref=f3e172]:
+                  - heading "前端项目部署" [level=3] [ref=f3e173]
+                  - generic [ref=f3e174]:
+                    - generic [ref=f3e175]: 2026-08-05
+                    - generic [ref=f3e178]: 2707字
+              - generic [ref=f3e182]:
+                - text: 大公司如何开发部署前端代码 > 多人协作模式下的前端代码开发、超大流量访问下的前端应用的部署 - 多人协作开发 这个比较基础、主要是代码管理方面，使用 git 或者 svn，按照一定的 flow，如从 dev 分支下切新分支进行开发、开发完成之后提测，发起合并请求，合并到测试分支，当测试...
+                - generic [ref=f3e183]: 阅读全文
+          - link [ref=f3e186] [cursor=pointer]:
+            - /url: /blog/GameFi
+            - generic [ref=f3e187]:
+              - generic [ref=f3e190]:
+                - heading "GameFi(Defi的游戏化)" [level=3] [ref=f3e191]
+                - generic [ref=f3e192]:
+                  - generic [ref=f3e193]: 2026-08-05
+                  - generic [ref=f3e196]: 6字
+              - generic [ref=f3e200]:
+                - text: 什么都没留下...
+                - generic [ref=f3e201]: 阅读全文
+          - link [ref=f3e204] [cursor=pointer]:
+            - /url: /blog/LiquidityFarm
+            - generic [ref=f3e205]:
+              - generic [ref=f3e208]:
+                - heading "流动性挖矿" [level=3] [ref=f3e209]
+                - generic [ref=f3e210]:
+                  - generic [ref=f3e211]: 2026-08-05
+                  - generic [ref=f3e214]: 1892字
+              - generic [ref=f3e218]:
+                - text: 什么是挖矿？ 最初在区块链中的挖矿是指使用计算机硬件（如 CPU、GPU 或专业的 ASIC 矿机）来执行特定的算法计算，以验证和记录区块链网络中的交易，这个过程对于维护区块链的安全性和去中心化至关重要。 区块链挖矿主要包括以下几个方面： - 交易验证：矿工通过解决复杂的数学问题来验证新生成...
+                - generic [ref=f3e219]: 阅读全文
+          - link "Thoughts 应似飞鸿踏雪泥——2025年终总结 2026-08-05 1709字 2025年终总结 阅读全文" [ref=f3e222] [cursor=pointer]:
+            - /url: /blog/2025
+            - generic [ref=f3e223]:
+              - generic [ref=f3e224]:
+                - generic [ref=f3e225]: Thoughts
+                - generic [ref=f3e227]:
+                  - heading "应似飞鸿踏雪泥——2025年终总结" [level=3] [ref=f3e228]
+                  - generic [ref=f3e229]:
+                    - generic [ref=f3e230]: 2026-08-05
+                    - generic [ref=f3e233]: 1709字
+              - generic [ref=f3e237]:
+                - text: 2025年终总结
+                - generic [ref=f3e238]: 阅读全文
+          - link [ref=f3e241] [cursor=pointer]:
+            - /url: /blog/farm
+            - generic [ref=f3e242]:
+              - generic [ref=f3e245]:
+                - heading "Farm(耕种)" [level=3] [ref=f3e246]
+                - generic [ref=f3e247]:
+                  - generic [ref=f3e248]: 2026-08-05
+                  - generic [ref=f3e251]: 61字
+              - generic [ref=f3e255]:
+                - text: Yield Farming(流动性挖矿) [ Yield(收益), Farm(耕种)，指将资金投入到不同的Defi协议中赚取回报 ]...
+                - generic [ref=f3e256]: 阅读全文
+          - link [ref=f3e259] [cursor=pointer]:
+            - /url: /blog/oracle
+            - generic [ref=f3e260]:
+              - generic [ref=f3e263]:
+                - heading "Oracle(预言机)" [level=3] [ref=f3e264]
+                - generic [ref=f3e265]:
+                  - generic [ref=f3e266]: 2026-08-05
+                  - generic [ref=f3e269]: 2889字
+              - generic [ref=f3e273]:
+                - text: 预言机(Oracle) jsx 什么是预言机？ 预言机是指数据馈送，它提取区块链数据源（下链）的数据并将数据存放到区块链（上链）上供智能合约使用。因为运行在以太坊上的智能合约无法访问存储在区块链网络之外的信息，预言机是必不可上的。 预言的意思（Oracle）是指古希腊神话中的神谕，由神或...
+                - generic [ref=f3e274]: 阅读全文
+          - link [ref=f3e277] [cursor=pointer]:
+            - /url: /blog/runners
+            - generic [ref=f3e278]:
+              - generic [ref=f3e281]:
+                - heading "Gitlab-Runners 配置" [level=3] [ref=f3e282]
+                - generic [ref=f3e283]:
+                  - generic [ref=f3e284]: 2026-08-05
+                  - generic [ref=f3e287]: 852字
+              - generic [ref=f3e291]:
+                - text: "gitlab-runners 流程配置 项目部署的流程如下: - 将项目打包(build) - 启动 web 服务器（如 nginx） - 将打包后的文件上传到 web 服务器的指定目录下 例如：scp -r ./buildDir/\\ 目标服务器名称@目标服务器 ip:目标服务器下 ng..."
+                - generic [ref=f3e292]: 阅读全文
+          - link [ref=f3e295] [cursor=pointer]:
+            - /url: /blog/smartContract
+            - generic [ref=f3e296]:
+              - generic [ref=f3e299]:
+                - heading "SmartContract(智能合约)" [level=3] [ref=f3e300]
+                - generic [ref=f3e301]:
+                  - generic [ref=f3e302]: 2026-08-05
+                  - generic [ref=f3e305]: 726字
+              - generic [ref=f3e309]:
+                - text: <aside> 💡 智能合约是部署在链上的，具有公开透明，不可篡改的特性 </aside> 智能合约是一种运行在以太坊链上的程序，它是位于以太坊区块链上的一个特定地址的一系列代码（函数）和数据（状态）。智能合约也是一个以太坊账户，我们称之为合约账户，这意味着它有余额，可以通过网络进行交易，但是...
+                - generic [ref=f3e310]: 阅读全文
+          - link [ref=f3e313] [cursor=pointer]:
+            - /url: /blog/token
+            - generic [ref=f3e314]:
+              - generic [ref=f3e317]:
+                - heading "Token(通证)" [level=3] [ref=f3e318]
+                - generic [ref=f3e319]:
+                  - generic [ref=f3e320]: 2026-08-05
+                  - generic [ref=f3e323]: 1338字
+              - generic [ref=f3e327]:
+                - text: Web3 中的 Token 的作用： - 代币：ERC20 类型的通证基本都属于这种类型，可用于众筹，债券发行，商品与服务的买卖，其总市值代表一个项目的总资产合总价值 - 金融工具与金融衍生品 - 所有权令牌：ERC721 代币属于这种类型 - 激励工具：如比特币 - 安全保障手段：如比特币、E...
+                - generic [ref=f3e328]: 阅读全文
+          - link [ref=f3e331] [cursor=pointer]:
+            - /url: /blog/wallet
+            - generic [ref=f3e332]:
+              - generic [ref=f3e335]:
+                - heading "区块链钱包" [level=3] [ref=f3e336]
+                - generic [ref=f3e337]:
+                  - generic [ref=f3e338]: 2026-08-05
+                  - generic [ref=f3e341]: 3923字
+              - generic [ref=f3e345]:
+                - text: <font face="微软雅黑" size="3"> 什么是区块链钱包 &emsp;区块链钱包是加密货币应用中必不可少的一部分，也是加密基础设施中最基础的一部分，区块链钱包的存在使得区块链收发资金成为可能。区块链钱包同时也是web3.0的一个重要入口，事实上，web3的绝大多数应用，必...
+                - generic [ref=f3e346]: 阅读全文
+          - link [ref=f3e349] [cursor=pointer]:
+            - /url: /blog/聚合器Yearn
+            - generic [ref=f3e350]:
+              - generic [ref=f3e353]:
+                - heading "聚合器(Yearn)" [level=3] [ref=f3e354]
+                - generic [ref=f3e355]:
+                  - generic [ref=f3e356]: 2026-08-05
+                  - generic [ref=f3e359]: 1895字
+              - generic [ref=f3e363]:
+                - text: jsx DeFi聚合器Yearn项目出现原因，源自于DeFi项目的泛滥与治理币诞生，海量的交易导致以太坊的Gas飙升 什么是聚合器： 当 N 多个 DeFi 项目同时 Farm 或者 Mint，项目方发行了一些名为治理币的激励，本意是为了在 DeFi 项目中利用治理币做一些投票来共同管理社区...
+                - generic [ref=f3e364]: 阅读全文
+  - alert [ref=f3e367]

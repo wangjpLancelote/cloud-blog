@@ -16,11 +16,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { Menu, Wrench } from "lucide-react";
 import type { ComponentType } from "react";
 
 // Fix React 19 Lucide icon type compatibility
 const IconMenu = Menu as unknown as ComponentType<{ className?: string }>;
+const IconWrench = Wrench as unknown as ComponentType<{ className?: string }>;
 
 export function Navigation() {
   const { t } = useI18n();
@@ -143,6 +144,15 @@ export function Navigation() {
         
         {/* 语言切换和友链 */}
         <div className="flex items-center gap-2">
+          {process.env.NODE_ENV === "development" && (
+            <Link
+              href="/tools/notion-converter"
+              className="flex items-center justify-center w-9 h-9 rounded-xl bg-black/3 hover:bg-black/6 text-muted-text hover:text-foreground transition-colors"
+              title="Notion to MDX Converter"
+            >
+              <IconWrench className="w-4 h-4" />
+            </Link>
+          )}
           <FriendLinksDropdown />
           <TranslateSwitcher />
           
