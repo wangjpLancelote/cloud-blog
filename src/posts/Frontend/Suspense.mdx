@@ -1,0 +1,58 @@
+---
+title: "Suspense"
+date: "2026-08-07"
+description: "在没有Suspense组件之前是如何达到以上效果的呢"
+---
+
+在没有Suspense组件之前是如何达到以上效果的呢
+
+通过条件渲染：
+
+```jsx
+if (isLoading) return <Spin/>
+return <MyComponent>
+```
+
+而有了Suspense之后，做法就变了
+
+```jsx
+<Suspense callback={<Spin />}>
+  <MyComponent />
+</Suspense>
+```
+
+那么Suspense是如何知道什么时候渲染Spin、什么时候渲染MyComponent的呢，
+
+根据子组件内的异常来控制的，类似于ErrorBoundary，不同的是，Suspense捕获的异常必须是Promise，也就是说在子组件内，需要将数据请求的fetch过程，抛出对应的Erro，由Suspense捕获，捕获后对thenable对象的then方法进行回调注册。
+
+因此，通常需要对promise的请求方法做一些改造，才能触发Suspense的回调组件渲染，官方的推荐做法是使用`SWR`来进行数据的请求。
+
+```jsx
+import { Suspense } from "react";
+import useSWR from "swr";
+
+function Profile() {
+  const { data } = useSWR("/api/user", fetcher, { suspense: true });
+  return <div>hello, {data.name}</div>;
+}
+
+function App() {
+  return (
+    <Suspense fallback={<div>loading...</div>}>
+      <Profile />
+    </Suspense>
+  );
+}
+```
+
+Suspense的另一种做法是和lazy进行结合，由此可见，React.lazy内部也是对传入的Component进行了Promise的返回处理，
+
+```jsx
+<Suspense fallback={<GlobalLoading />}>
+  {lazy(() => import("xxx/xxx.tsx"))}
+</Suspense>
+```
+
+在React.lazy内部，第一次执行会先抛出error，触发Suspense的callback渲染
+
+Suspense内部的实现是采用了OffScreen组件来渲染子组件，这个组件的特性是能根据传入的mode来控制子组件的显隐，好处是能保存子组件的状态，类似于Vue的keep-alive，且拥有最低的调度优先级。

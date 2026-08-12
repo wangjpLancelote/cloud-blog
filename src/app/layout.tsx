@@ -8,6 +8,7 @@ import { AppToaster } from "@/components/cloud-ui/toaster";
 import { StoreProvider } from "@/store/provider";
 import { geist, geistMono } from "./(style)/fonts";
 import { Navigation } from "@/components/Navigation";
+import { MusicPlayer } from "@/components/MusicPlayer";
 import { SiteBanner } from "@/components/SiteBanner";
 
 export const viewport: Viewport = {
@@ -55,6 +56,7 @@ export default function RootLayout({
         <StoreProvider>
           <I18nProvider>
             <Navigation />
+            <MusicPlayer src="https://archive.org/download/freepd/Page2/Ambient%20C%20Motion.mp3" />
             <main
               id="app-main"
               className="flex-1 overflow-x-hidden overflow-y-auto"

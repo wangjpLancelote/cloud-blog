@@ -2,15 +2,14 @@
 
 import Link from "next/link";
 import { useCallback, useState } from "react";
-import { Calendar, ArrowRight, MoreHorizontal, Copy, Check } from "lucide-react";
+import { Calendar, ArrowRight, Link2, Check } from "lucide-react";
 import type { ComponentType } from "react";
 import type { PostItem } from "@/lib/posts";
 import { cn } from "@/lib/utils";
 
 const IconCalendar = Calendar as unknown as ComponentType<{ className?: string }>;
 const IconArrowRight = ArrowRight as unknown as ComponentType<{ className?: string }>;
-const IconMore = MoreHorizontal as unknown as ComponentType<{ className?: string }>;
-const IconCopy = Copy as unknown as ComponentType<{ className?: string }>;
+const IconLink = Link2 as unknown as ComponentType<{ className?: string }>;
 const IconCheck = Check as unknown as ComponentType<{ className?: string }>;
 
 function formatDate(dateStr?: string): string {
@@ -109,50 +108,33 @@ export function PostCard({ post }: { post: PostItem }) {
         </article>
       </Link>
 
-      {/* Dropdown trigger — shown on card hover */}
-      <div className="absolute top-3 right-3 z-10">
-        <div className="opacity-0 group-hover/card:opacity-100 transition-opacity">
-          <div className="relative group/dropdown">
-            <button
-              type="button"
-              className="flex items-center justify-center w-7 h-7 rounded-lg bg-white/90 shadow-sm border border-black/5 text-muted-text hover:text-foreground hover:bg-white transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-              }}
-              aria-label="文章操作"
-            >
-              <IconMore className="w-3.5 h-3.5" />
-            </button>
-
-            {/* Dropdown menu */}
-            <div className="absolute right-0 top-full mt-1 w-40 py-1 bg-white rounded-lg shadow-card border border-border/50 opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-150">
-              <button
-                type="button"
-                onClick={handleCopyLink}
-                className={cn(
-                  "flex items-center gap-2 w-full px-3 py-2 text-sm text-left transition-colors",
-                  copied
-                    ? "text-green-600"
-                    : "text-foreground/80 hover:bg-black/5"
-                )}
-              >
-                {copied ? (
-                  <>
-                    <IconCheck className="w-3.5 h-3.5 shrink-0" />
-                    已复制
-                  </>
-                ) : (
-                  <>
-                    <IconCopy className="w-3.5 h-3.5 shrink-0" />
-                    复制文章链接
-                  </>
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Copy link bar — fades in below the card on hover */}
+      <button
+        type="button"
+        onClick={handleCopyLink}
+        className={cn(
+          "absolute left-0 right-0 top-full",
+          "flex items-center justify-center gap-1.5 h-6",
+          "bg-gradient-to-b from-white/50 to-transparent",
+          "rounded-b-lg",
+          "text-xs",
+          "opacity-0 group-hover/card:opacity-100",
+          "transition-opacity duration-300",
+          copied ? "text-green-600" : "text-muted-text hover:text-primary"
+        )}
+      >
+        {copied ? (
+          <>
+            <IconCheck className="w-3 h-3" />
+            已复制
+          </>
+        ) : (
+          <>
+            <IconLink className="w-3 h-3" />
+            复制链接
+          </>
+        )}
+      </button>
     </div>
   );
 }

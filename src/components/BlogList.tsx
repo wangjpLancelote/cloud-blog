@@ -125,7 +125,7 @@ export function BlogList({ posts, categories }: Props) {
       </div>
 
       {/* Post grid */}
-      <div className={cn("grid gap-5", GRID_CLASS[layout])}>
+      <div className={cn("grid gap-8", GRID_CLASS[layout])}>
         {filtered.map((post) => (
           <PostCard key={post.slug} post={post} />
         ))}

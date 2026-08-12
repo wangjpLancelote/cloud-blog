@@ -33,6 +33,7 @@
 
   /* 动画 & 关键帧 */
   --animate-gradient-flow: gradient-flow 15s ease infinite;
+  --animate-spin-slow: spin 8s linear infinite;
   @keyframes gradient-flow {
     0%,
     100% {
