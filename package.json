@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:biome": "biome lint .",
-    "lint:biome:changed": "biome lint --changed",
+    "lint:biome:changed": "biome lint --staged",
     "test": "vitest run",
     "prepare": "simple-git-hooks"
   },
@@ -58,6 +58,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.69.0",
     "react-icons": "^5.5.0",
+    "react-reader": "2.0.15",
     "rehype-pretty-code": "^0.14.1",
     "rehype-prism-plus": "^2.0.1",
     "remark-gfm": "^4.0.1",

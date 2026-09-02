@@ -10,9 +10,33 @@
     "blog": "博客",
     "blockchain": "区块链",
     "learning": "学习笔记",
+    "books": "Books",
     "friends": "友链",
     "friendsEmpty": "暂无友链",
     "navigation": "导航"
+  },
+  "books": {
+    "eyebrow": "数字书房",
+    "title": "我的书架",
+    "description": "把正在读、想重读的书收进一座安静的书架。",
+    "all": "全部",
+    "booksCount": "本书",
+    "continue": "继续阅读",
+    "start": "开始阅读",
+    "back": "返回书架",
+    "contents": "目录",
+    "settings": "阅读设置",
+    "fontSize": "字号",
+    "lineHeight": "行距",
+    "font": "字体",
+    "serif": "衬线",
+    "sans": "无衬线",
+    "theme": "主题",
+    "loading": "正在打开书籍…",
+    "error": "无法打开这本书，请检查 EPUB 文件。",
+    "previous": "上一页",
+    "next": "下一页",
+    "emptyToc": "这本书没有可用目录"
   },
   "breadcrumb": {
     "home": "首页"

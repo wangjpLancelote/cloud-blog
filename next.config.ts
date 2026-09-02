@@ -20,6 +20,9 @@ const options = {
 
 const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "js", "jsx", "mdx", "md"],
+  // Keep `next dev` and `next build` from overwriting each other's vendor
+  // chunks when a production build runs while the local server is open.
+  distDir: process.env.NODE_ENV === "development" ? ".next-dev" : ".next",
   output: "export",
   images: {
     unoptimized: true,

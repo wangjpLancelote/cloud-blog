@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
-import { Music } from "lucide-react";
-import type { ComponentType } from "react";
 import { cn } from "@/lib/utils";
+import { Music } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { ComponentType } from "react";
 
 // Fix React 19 Lucide icon type compatibility
 const IconMusic = Music as unknown as ComponentType<{ className?: string }>;
@@ -13,6 +14,7 @@ interface MusicPlayerProps {
 }
 
 export function MusicPlayer({ src }: MusicPlayerProps) {
+  const pathname = usePathname();
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   // Use a ref for the playing state to avoid stale closure in callbacks
@@ -72,6 +74,8 @@ export function MusicPlayer({ src }: MusicPlayerProps) {
     }
   }, [src]);
 
+  if (/^\/books\/[^/]+\/?$/.test(pathname)) return null;
+
   return (
     <div className="top-20 right-4 z-40 fixed">
       <button
@@ -80,7 +84,7 @@ export function MusicPlayer({ src }: MusicPlayerProps) {
           "relative flex justify-center items-center w-10 h-10",
           "rounded-full bg-white/80 backdrop-blur-md shadow-card",
           "hover:bg-white/90 hover:shadow-glass transition-all duration-300",
-          "border border-white/20",
+          "border border-white/20"
         )}
         title={isPlaying ? "Pause music" : "Play music"}
         aria-label={isPlaying ? "Pause music" : "Play music"}
@@ -88,9 +92,7 @@ export function MusicPlayer({ src }: MusicPlayerProps) {
         <IconMusic
           className={cn(
             "w-5 h-5 transition-colors duration-300",
-            isPlaying
-              ? "text-primary animate-spin-slow"
-              : "text-muted-text hover:text-foreground",
+            isPlaying ? "text-primary animate-spin-slow" : "text-muted-text hover:text-foreground"
           )}
         />
       </button>

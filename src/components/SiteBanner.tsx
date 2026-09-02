@@ -1,8 +1,13 @@
 "use client";
 
 import { BlogTitle } from "@/components/BlogTitle";
+import { usePathname } from "next/navigation";
 
 export function SiteBanner() {
+  const pathname = usePathname();
+  const isReading = /^\/books\/[^/]+\/?$/.test(pathname);
+  if (isReading) return null;
+
   return (
     <div className="relative bg-gradient-to-r from-[#1a0533] via-[#2d1b69] to-[#1a0533] border-b border-purple-500/20 w-full max-w-none h-20 overflow-hidden">
       {/* Purple ambient glow */}

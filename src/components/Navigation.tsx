@@ -1,22 +1,16 @@
 "use client";
 
 import { useI18n } from "@/app/(translate)/I18nProvider";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { useEffect, useState, useRef, useMemo } from "react";
 import { TranslateSwitcher } from "@/app/(translate)/Translate";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { FriendLinksDropdown } from "@/components/FriendLinksDropdown";
 import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 import { Menu, Wrench } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { ComponentType } from "react";
 
 // Fix React 19 Lucide icon type compatibility
@@ -40,6 +34,7 @@ export function Navigation() {
       { href: "/blog", label: t("menu.blog") },
       { href: "/blockchain", label: t("menu.blockchain") },
       { href: "/learning", label: t("menu.learning") },
+      { href: "/books", label: t("menu.books") },
     ],
     [t]
   );
@@ -59,9 +54,7 @@ export function Navigation() {
   // 计算激活项的位置
   useEffect(() => {
     const updateActiveRect = () => {
-      const activeIndex = navItems.findIndex((item) =>
-        pathname.startsWith(item.href)
-      );
+      const activeIndex = navItems.findIndex((item) => pathname.startsWith(item.href));
       const activeElement = itemsRef.current[activeIndex];
       const container = containerRef.current;
 
@@ -120,9 +113,7 @@ export function Navigation() {
               }}
               className={cn(
                 "z-10 relative flex items-center px-4 sm:px-6 py-2 rounded-xl font-medium text-sm transition-colors duration-300",
-                isActive
-                  ? "text-foreground"
-                  : "text-muted-text hover:text-foreground"
+                isActive ? "text-foreground" : "text-muted-text hover:text-foreground"
               )}
             >
               <span>{item.label}</span>
@@ -141,7 +132,7 @@ export function Navigation() {
         <div className="md:hidden flex-1 mr-2 min-w-0">
           <Breadcrumb />
         </div>
-        
+
         {/* 语言切换和友链 */}
         <div className="flex items-center gap-2">
           {process.env.NODE_ENV === "development" && (
@@ -155,7 +146,7 @@ export function Navigation() {
           )}
           <FriendLinksDropdown />
           <TranslateSwitcher />
-          
+
           {/* 移动端菜单按钮 */}
           <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
             <SheetTrigger asChild>
@@ -168,9 +159,14 @@ export function Navigation() {
                 <IconMenu className="w-4 h-4" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-72 bg-white/98 backdrop-blur-xl border-l border-black/5">
+            <SheetContent
+              side="right"
+              className="w-72 bg-white/98 backdrop-blur-xl border-l border-black/5"
+            >
               <SheetHeader>
-                <SheetTitle className="text-left text-foreground/80">{t("menu.navigation")}</SheetTitle>
+                <SheetTitle className="text-left text-foreground/80">
+                  {t("menu.navigation")}
+                </SheetTitle>
               </SheetHeader>
               <nav className="mt-8 flex flex-col gap-1">
                 {navItems.map((item, index) => {

@@ -10,9 +10,33 @@
     "blog": "Blog",
     "blockchain": "Blockchain",
     "learning": "Learning",
+    "books": "Books",
     "friends": "Links",
     "friendsEmpty": "No links yet",
     "navigation": "Navigation"
+  },
+  "books": {
+    "eyebrow": "Digital library",
+    "title": "My bookshelf",
+    "description": "A quiet shelf for books worth reading and returning to.",
+    "all": "All",
+    "booksCount": "books",
+    "continue": "Continue reading",
+    "start": "Start reading",
+    "back": "Back to bookshelf",
+    "contents": "Contents",
+    "settings": "Reading settings",
+    "fontSize": "Font size",
+    "lineHeight": "Line height",
+    "font": "Typeface",
+    "serif": "Serif",
+    "sans": "Sans serif",
+    "theme": "Theme",
+    "loading": "Opening book…",
+    "error": "This book could not be opened. Check its EPUB file.",
+    "previous": "Previous page",
+    "next": "Next page",
+    "emptyToc": "This book has no table of contents"
   },
   "breadcrumb": {
     "home": "Home"

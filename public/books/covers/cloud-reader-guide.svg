@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Cloud Reader 使用指南封面</title>
+  <desc id="desc">暖灰色封面，中间是一扇打开的门和 Cloud Reader 字样</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ede8db"/>
+      <stop offset="1" stop-color="#cbc2ad"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence baseFrequency=".55" numOctaves="2" seed="8" type="fractalNoise"/>
+      <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 .055 0"/>
+    </filter>
+  </defs>
+  <rect width="600" height="900" fill="url(#paper)"/>
+  <rect width="600" height="900" filter="url(#grain)" opacity=".55"/>
+  <rect x="52" y="52" width="496" height="796" rx="4" fill="none" stroke="#34352f" stroke-width="2"/>
+  <text x="300" y="175" text-anchor="middle" fill="#34352f" font-family="Georgia,serif" font-size="54" letter-spacing="4">CLOUD</text>
+  <text x="300" y="235" text-anchor="middle" fill="#34352f" font-family="Georgia,serif" font-size="54" letter-spacing="4">READER</text>
+  <path d="M205 360h190v300H205z" fill="#373832"/>
+  <path d="M226 381h148v279H226z" fill="#e4decd"/>
+  <path d="M226 381l115 32v247H226z" fill="#9f9b8c"/>
+  <circle cx="324" cy="526" r="7" fill="#34352f"/>
+  <text x="300" y="745" text-anchor="middle" fill="#34352f" font-family="system-ui,sans-serif" font-size="24" letter-spacing="5">使用指南</text>
+  <text x="300" y="790" text-anchor="middle" fill="#5f6058" font-family="system-ui,sans-serif" font-size="18">CLOUD BLOG</text>
+</svg>
