@@ -27,7 +27,6 @@ export function Navigation() {
           <span className="brand-mark" aria-hidden="true">
             c.
           </span>
-          <span>Cloud Blog</span>
         </Link>
         <nav className="desktop-nav" aria-label={t("menu.navigation")}>
           {items.map(([href, key]) => (
