@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import Layout from "@/components/Layout";
-import { NotionConverter } from "@/components/notion-converter/NotionConverter";
+import { WritingWorkspace } from "@/components/writing/WritingWorkspace";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Notion → MDX Converter",
+  title: "写作工具",
   description:
     "Convert Notion pages to MDX format for Cloud Blog posts. Paste, preview, and download.",
 };
@@ -16,7 +16,7 @@ export default function NotionConverterPage() {
 
   return (
     <Layout>
-      <NotionConverter />
+      <WritingWorkspace />
     </Layout>
   );
 }

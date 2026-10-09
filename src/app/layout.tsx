@@ -7,12 +7,12 @@ import { I18nProvider } from "@/app/(translate)/I18nProvider";
 import { AppToaster } from "@/components/cloud-ui/toaster";
 import { StoreProvider } from "@/store/provider";
 import { geist, geistMono } from "./(style)/fonts";
-import { Navigation } from "@/components/Navigation";
-import { MusicPlayer } from "@/components/MusicPlayer";
-import { SiteBanner } from "@/components/SiteBanner";
+import { SiteShell } from "@/components/SiteShell";
+
+
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#FDFCFB",
 };
 
 export const metadata: Metadata = {
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Cloud Blog",
     description:
       "Lorenzo Wang 的个人博客与知识库，记录区块链、前端与成长思考。",
-    url: "https://lorenzo-wang.pages.dev/blog",
+    url: "https://lorenzo-wang.pages.dev",
     siteName: "Cloud Blog",
     type: "website",
   },
@@ -50,20 +50,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geist.variable} ${geistMono.variable} antialiased text-foreground bg-[radial-gradient(circle_at_20%_20%,rgba(245,250,255,0.92),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(190,215,245,0.55),transparent_32%),radial-gradient(circle_at_40%_90%,rgba(220,235,250,0.65),transparent_36%)] bg-slate-50/90 h-screen overflow-hidden flex flex-col`}
+        className={`${geist.variable} ${geistMono.variable} antialiased site-body`}
       >
         <AppToaster />
         <StoreProvider>
           <I18nProvider>
-            <Navigation />
-            <MusicPlayer src="https://archive.org/download/freepd/Page2/Ambient%20C%20Motion.mp3" />
-            <main
-              id="app-main"
-              className="flex-1 overflow-x-hidden overflow-y-auto"
-            >
-              <SiteBanner />
-              {children}
-            </main>
+            <SiteShell>{children}</SiteShell>
           </I18nProvider>
         </StoreProvider>
       </body>

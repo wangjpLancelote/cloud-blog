@@ -53,8 +53,8 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (typeof document === "undefined") return;
-    document.documentElement.lang = choice === "auto" ? "auto" : locale;
-  }, [choice, locale]);
+    document.documentElement.lang = locale;
+  }, [locale]);
 
   const messages = useMemo(() => dictionaries[locale], [locale]);
 

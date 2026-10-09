@@ -5,7 +5,7 @@ import { useEffect } from "react";
 export function ScrollToTopOnMount() {
   useEffect(() => {
     // 获取滚动容器
-    const scrollContainer = document.getElementById("app-main");
+    const scrollContainer = window;
     
     if (scrollContainer) {
       // 立即滚动到顶部

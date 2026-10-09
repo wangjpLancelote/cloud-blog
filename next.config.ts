@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
   // Keep `next dev` and `next build` from overwriting each other's vendor
   // chunks when a production build runs while the local server is open.
   distDir: process.env.NODE_ENV === "development" ? ".next-dev" : ".next",
-  output: "export",
+  output: process.env.NODE_ENV === "development" ? undefined : "export",
   images: {
     unoptimized: true,
   },

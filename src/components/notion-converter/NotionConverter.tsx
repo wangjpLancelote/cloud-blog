@@ -40,7 +40,7 @@ type PreviewTab = "rendered" | "raw";
 
 const CATEGORY_OPTIONS = ["Frontend", "Thoughts"];
 
-export function NotionConverter() {
+export function NotionConverter({ onDirtyChange }: { onDirtyChange?: (dirty: boolean) => void } = {}) {
   const [pastedHtml, setPastedHtml] = useState("");
   const [markdown, setMarkdown] = useState("");
   const [title, setTitle] = useState("");
@@ -53,6 +53,10 @@ export function NotionConverter() {
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "error">("idle");
   const [hasPasted, setHasPasted] = useState(false);
   const pasteTargetRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    onDirtyChange?.(!!(markdown.trim() || title.trim() || description.trim() || pastedHtml.trim()));
+  }, [markdown, title, description, pastedHtml, onDirtyChange]);
 
   // Parse pasted HTML to markdown whenever it changes
   useEffect(() => {

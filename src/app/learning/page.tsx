@@ -1,10 +1,17 @@
-import Layout from "@/components/Layout";
+import { TopicPage } from "@/components/TopicPage";
+import { getAllPosts } from "@/lib/posts";
+import { sortPosts } from "@/lib/post-display";
 
 export default function LearningPage() {
   return (
-    <Layout>
-      <h1>Learning</h1>
-      <p>Content about learning and notes will be here.</p>
-    </Layout>
+    <TopicPage
+      topic="learning"
+      posts={sortPosts(
+        getAllPosts().filter(
+          (post) =>
+            ["Frontend", "AI", "Learning"].includes(post.category ?? "") || post.slug === "runners"
+        )
+      )}
+    />
   );
 }

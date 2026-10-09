@@ -45,7 +45,7 @@ export function TranslateSwitcher() {
   return (
     <div className="relative" ref={dropdownRef}>
       {/* Desktop Version */}
-      <div className="hidden lg:flex items-center gap-1 bg-black/3 p-1 border border-black/5 rounded-xl">
+      <div className="hidden items-center gap-1 bg-black/3 p-1 border border-black/5 rounded-xl">
         {OPTIONS.map((opt) => (
           <button
             key={opt.value}
@@ -63,11 +63,13 @@ export function TranslateSwitcher() {
       </div>
 
       {/* Mobile Version (Dropdown) */}
-      <div className="lg:hidden">
+      <div className="block">
         <Button
           variant="ghost"
           size="sm"
           className="bg-black/3 hover:bg-black/6 p-0 rounded-xl w-9 h-9"
+          aria-label={t("language")}
+          aria-expanded={isOpen}
           onClick={() => setIsOpen(!isOpen)}
         >
           <IconGlobe className="w-4 h-4" />

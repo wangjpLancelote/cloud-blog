@@ -8,50 +8,13 @@ export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // 获取实际的滚动容器
-    const scrollContainer = document.getElementById("app-main") || window;
-
-    const toggleVisibility = () => {
-      // 获取滚动位置
-      const scrollY =
-        scrollContainer === window
-          ? window.scrollY
-          : (scrollContainer as HTMLElement).scrollTop;
-
-      // 当滚动超过 400px 时显示按钮
-      if (scrollY > 400) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    // 初始检查
+    const toggleVisibility = () => setIsVisible(window.scrollY > 400);
     toggleVisibility();
-
-    // 监听滚动事件
-    scrollContainer.addEventListener("scroll", toggleVisibility, { passive: true });
-
-    return () => {
-      scrollContainer.removeEventListener("scroll", toggleVisibility);
-    };
+    window.addEventListener("scroll", toggleVisibility, { passive: true });
+    return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
-  const scrollToTop = () => {
-    const scrollContainer = document.getElementById("app-main") || window;
-
-    if (scrollContainer === window) {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    } else {
-      (scrollContainer as HTMLElement).scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    }
-  };
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   if (!isVisible) {
     return null;

@@ -14,7 +14,7 @@ interface MusicPlayerProps {
 }
 
 export function MusicPlayer({ src }: MusicPlayerProps) {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "/";
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   // Use a ref for the playing state to avoid stale closure in callbacks
@@ -77,13 +77,13 @@ export function MusicPlayer({ src }: MusicPlayerProps) {
   if (/^\/books\/[^/]+\/?$/.test(pathname)) return null;
 
   return (
-    <div className="top-20 right-4 z-40 fixed">
+    <div className="bottom-8 left-5 z-40 fixed">
       <button
         onClick={togglePlay}
         className={cn(
           "relative flex justify-center items-center w-10 h-10",
-          "rounded-full bg-white/80 backdrop-blur-md shadow-card",
-          "hover:bg-white/90 hover:shadow-glass transition-all duration-300",
+          "rounded-full bg-white/80 backdrop-blur-md shadow-subtle",
+          "hover:bg-white/90 hover:shadow-sm transition-all duration-300",
           "border border-white/20"
         )}
         title={isPlaying ? "Pause music" : "Play music"}

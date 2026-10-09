@@ -1,31 +1,31 @@
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --muted: 210 25% 93%;
-    --muted-foreground: 215 14% 42%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --border: 216 20% 80%;
-    --input: 216 20% 80%;
-    --primary: 217 91% 58%;
+    --background: 30 33% 99%;
+    --foreground: 0 0% 13%;
+    --muted: 36 17% 94%;
+    --muted-foreground: 30 6% 30%;
+    --popover: 30 33% 99%;
+    --popover-foreground: 0 0% 13%;
+    --card: 30 33% 99%;
+    --card-foreground: 0 0% 13%;
+    --border: 34 14% 90%;
+    --input: 34 14% 90%;
+    --primary: 0 0% 20%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 25% 93%;
+    --secondary: 36 17% 94%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-    --accent: 210 25% 93%;
+    --accent: 36 17% 94%;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --ring: 217 91% 58%;
+    --ring: 0 0% 20%;
     --radius: 0.5rem;
     color-scheme: light;
 
     /* Custom tokens */
-    --color-primary: 217 91% 58%;
+    --color-primary: 0 0% 20%;
     --color-primary-text: 210 40% 98%;
-    --color-secondary: 258 85% 64%;
+    --color-secondary: 30 6% 46%;
     --color-secondary-text: 230 50% 15%;
 
     --space-xs: 0.25rem;
@@ -85,6 +85,6 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-geist), -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
   }
 }

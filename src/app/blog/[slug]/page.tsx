@@ -1,3 +1,5 @@
+import { MarkdownContent } from "@/components/writing/MarkdownContent";
+import { postDate, postTags } from "@/lib/post-display";
 import GiscusComment from "@/components/GisusComment";
 import { getAllPostSlugs, getPostContent } from "@/lib/posts";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -35,7 +37,9 @@ export default async function BlogPost({
 }) {
   const { slug } = await params;
   const decodedSlug = decodeURIComponent(slug);
-  const { content, frontmatter } = getPostContent(decodedSlug);
+  const post = getPostContent(decodedSlug);
+  const { content, frontmatter } = post;
+  const date = postDate(post);
   const components = { Custom, ...mdxComponents };
 
   // 强制类型兼容，避免 React 19 下 async 组件类型检查失败
@@ -45,18 +49,26 @@ export default async function BlogPost({
     <Layout>
       <ScrollToTopOnMount />
       <TitleSync title={frontmatter.title} />
-      <article className="dark:prose-invert mx-auto w-full max-w-4xl md:max-w-5xl lg:max-w-5xl xl:max-w-6xl prose prose-lg">
+      <article className="article-prose prose prose-lg dark:prose-invert">
         <h1 className="wrap-break-word hyphens-auto">{frontmatter.title}</h1>
-        <MDXRemoteComponent
-          source={content}
-          components={components}
-          options={{
-            mdxOptions: {
-              remarkPlugins: [],
-              rehypePlugins: [[rehypePrettyCode, options]],
-            },
-          }}
-        />
+        <div className="article-meta not-prose">
+          {date && <time dateTime={date}>{date.replaceAll("-", ".")}</time>}
+          <span>{postTags(post).join(" · ")}</span>
+        </div>
+        {frontmatter.editor === "markdown" ? (
+          <MarkdownContent content={content} />
+        ) : (
+          <MDXRemoteComponent
+            source={content}
+            components={components}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [],
+                rehypePlugins: [[rehypePrettyCode, options]],
+              },
+            }}
+          />
+        )}
       </article>
       <GiscusComment />
     </Layout>

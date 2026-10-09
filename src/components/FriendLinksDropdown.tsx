@@ -1,206 +1,218 @@
 "use client";
 
 import { useI18n } from "@/app/(translate)/I18nProvider";
-import { Button } from "@/components/cloud-ui/button";
-import { FRIEND_LINKS } from "@/constants/friend-links";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowUpRight, ChevronDown, Link2, User } from "lucide-react";
-import type { ComponentType } from "react";
-
-// Fix React 19 Lucide icon type compatibility
-const IconLink2 = Link2 as unknown as ComponentType<{ className?: string }>;
-const IconChevronDown = ChevronDown as unknown as ComponentType<{
-  className?: string;
-}>;
-const IconUser = User as unknown as ComponentType<{ className?: string }>;
-const IconArrowUpRight = ArrowUpRight as unknown as ComponentType<{
-  className?: string;
-}>;
+import { FRIEND_LINKS, type FriendLink } from "@/constants/friend-links";
+import {
+  createFriendLink,
+  FRIEND_LINKS_STORAGE_KEY,
+  readSavedFriendLinks,
+} from "@/lib/friend-links";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
+import { toast } from "sonner";
 
 export function FriendLinksDropdown() {
   const { t } = useI18n();
-  const [isOpen, setIsOpen] = useState(false);
-  const [brokenAvatar, setBrokenAvatar] = useState<Record<string, boolean>>({});
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const closeTimerRef = useRef<number | null>(null);
+  const [brokenAvatars, setBrokenAvatars] = useState<Record<string, boolean>>({});
+  const [saved, setSaved] = useState<FriendLink[]>([]);
+  const [ready, setReady] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+  const [error, setError] = useState("");
+  const trigger = useRef<HTMLButtonElement>(null);
+  const id = useId();
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
+    const reload = () => {
+      try {
+        setSaved(readSavedFriendLinks(window.localStorage));
+      } catch {
+        setSaved([]);
       }
+      setReady(true);
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    reload();
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === FRIEND_LINKS_STORAGE_KEY || event.key === null) reload();
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
   }, []);
 
-  const cancelScheduledClose = () => {
-    if (closeTimerRef.current !== null) {
-      window.clearTimeout(closeTimerRef.current);
-      closeTimerRef.current = null;
+  const addLink = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError("");
+    let next: FriendLink[];
+    try {
+      const current = readSavedFriendLinks(window.localStorage);
+      const item = createFriendLink(title, url, [...FRIEND_LINKS, ...current]);
+      next = [...current, item];
+    } catch (err) {
+      const code =
+        err instanceof Error && ["invalidTitle", "invalidUrl", "duplicate"].includes(err.message)
+          ? err.message
+          : "saveError";
+      setError(t(`friendsForm.${code}`));
+      return;
     }
+    try {
+      window.localStorage.setItem(FRIEND_LINKS_STORAGE_KEY, JSON.stringify(next));
+    } catch {
+      setError(t("friendsForm.saveError"));
+      return;
+    }
+    setSaved(next);
+    setDialogOpen(false);
+    toast.success(t("friendsForm.success"));
   };
-
-  const scheduleClose = (delayMs = 120) => {
-    cancelScheduledClose();
-    closeTimerRef.current = window.setTimeout(() => {
-      setIsOpen(false);
-      closeTimerRef.current = null;
-    }, delayMs);
-  };
-
-  const links = useMemo(() => {
-    return FRIEND_LINKS.map((l) => ({
-      ...l,
-      external: /^https?:\/\//.test(l.link),
-    }));
-  }, []);
 
   return (
-    <div className="relative" ref={dropdownRef}>
-      {/* Desktop trigger (hover) */}
-      <div className="hidden lg:flex items-center bg-black/3 p-1 border border-black/5 rounded-xl">
-        <button
-          type="button"
-          onMouseEnter={() => {
-            cancelScheduledClose();
-            setIsOpen(true);
+    <>
+      <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
+        <DropdownMenuTrigger asChild>
+          <button
+            ref={trigger}
+            type="button"
+            className="friends-trigger"
+            aria-label={t("menu.friends")}
+          >
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              aria-hidden="true"
+            >
+              <path d="M10 13a5 5 0 0 0 7 .1l3-3a5 5 0 0 0-7-7l-2 2M14 11a5 5 0 0 0-7-.1l-3 3a5 5 0 0 0 7 7l2-2" />
+            </svg>
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent
+          align="end"
+          sideOffset={10}
+          className="friends-menu"
+          onCloseAutoFocus={(event) => {
+            if (dialogOpen) event.preventDefault();
           }}
-          onMouseLeave={() => scheduleClose()}
-          onClick={() => setIsOpen((v) => !v)}
-          className={cn(
-            "flex items-center gap-1 px-3 py-1.5 rounded-lg font-medium text-xs whitespace-nowrap transition-all",
-            isOpen
-              ? "bg-white text-foreground shadow-sm ring-1 ring-black/2"
-              : "text-muted-text hover:text-foreground hover:bg-white/40"
-          )}
-          aria-haspopup="menu"
-          aria-expanded={isOpen}
         >
-          <span>{t("menu.friends")}</span>
-          <IconChevronDown
-            className={cn(
-              "w-3.5 h-3.5 transition-transform",
-              isOpen ? "rotate-180" : "rotate-0"
-            )}
-          />
-        </button>
-      </div>
-
-      {/* Mobile trigger (click) */}
-      <div className="lg:hidden">
-        <Button
-          variant="ghost"
-          size="sm"
-          className="bg-black/3 hover:bg-black/6 p-0 rounded-xl w-9 h-9"
-          onClick={() => setIsOpen((v) => !v)}
-          aria-haspopup="menu"
-          aria-expanded={isOpen}
-        >
-          <IconLink2 className="w-4 h-4" />
-        </Button>
-      </div>
-
-      {isOpen && (
-        <div
-          className={cn(
-            "right-0 z-60 absolute bg-white shadow-glass mt-2 py-1 border border-black/5 rounded-xl w-56 animate-in duration-200 fade-in zoom-in"
-          )}
-          role="menu"
-          onMouseEnter={() => cancelScheduledClose()}
-          onMouseLeave={() => scheduleClose()}
-        >
-          {links.length === 0 ? (
-            <div className="px-4 py-2 text-sm text-muted-text">
-              {t("menu.friendsEmpty")}
-            </div>
-          ) : (
-            links.map((item) => {
-              const commonClassName =
-                "group flex items-center gap-3 px-4 py-2 w-full text-left rounded-lg transition-all duration-150 ease-out " +
-                "bg-white/0 ring-1 ring-black/0 shadow-none " +
-                "hover:bg-black/6 hover:ring-black/8 hover:shadow-[0_6px_14px_rgba(0,0,0,0.10),0_2px_6px_rgba(0,0,0,0.06)] " +
-                "active:translate-y-[1px] active:shadow-[inset_0_2px_6px_rgba(0,0,0,0.14)] " +
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40";
-
-              const showAvatar = Boolean(item.avatar) && !brokenAvatar[item.link];
-
-              const content = (
-                <>
-                  {showAvatar ? (
+          <div className="friends-list">
+            {[...FRIEND_LINKS, ...saved].map((item) => (
+              <DropdownMenuItem asChild key={item.link}>
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="friend-item"
+                >
+                  {item.avatar && !brokenAvatars[item.link] ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={item.avatar}
-                      alt={item.name}
-                      className="rounded-full w-8 h-8 object-cover shrink-0 ring-1 ring-black/5"
+                      alt=""
+                      className="friend-initial"
                       loading="lazy"
-                      onError={() => {
-                        setBrokenAvatar((prev) => ({
-                          ...prev,
-                          [item.link]: true,
-                        }));
-                      }}
+                      onError={() =>
+                        setBrokenAvatars((current) => ({ ...current, [item.link]: true }))
+                      }
                     />
                   ) : (
-                    <div className="flex items-center justify-center rounded-full w-8 h-8 bg-black/5 shrink-0 ring-1 ring-black/5">
-                      <IconUser className="w-4 h-4 text-muted-text" />
-                    </div>
+                    <span className="friend-initial" aria-hidden="true">
+                      {Array.from(item.name)[0]}
+                    </span>
                   )}
-                  <div className="min-w-0 flex-1">
-                    <div className="text-sm text-foreground truncate">
-                      {item.name}
-                    </div>
-                    {item.description ? (
-                      <div className="text-xs text-muted-text truncate">
-                        {item.description}
-                      </div>
-                    ) : null}
-                  </div>
-                  <IconArrowUpRight
-                    className="w-4 h-4 text-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-150"
-                    aria-hidden="true"
-                  />
-                </>
-              );
-
-              if (item.external) {
-                return (
-                  <a
-                    key={item.link}
-                    href={item.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={commonClassName}
-                    role="menuitem"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {content}
-                  </a>
-                );
-              }
-
-              return (
-                <Link
-                  key={item.link}
-                  href={item.link}
-                  className={commonClassName}
-                  role="menuitem"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {content}
-                </Link>
-              );
-            })
-          )}
-        </div>
-      )}
-    </div>
+                  <span className="friend-text">
+                    <span className="friend-name">{item.name}</span>
+                    <span className="friend-description">
+                      {item.description || new URL(item.link).hostname}
+                    </span>
+                  </span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </DropdownMenuItem>
+            ))}
+          </div>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            disabled={!ready}
+            className="friend-add"
+            onSelect={() => {
+              setTitle("");
+              setUrl("");
+              setError("");
+              setDialogOpen(true);
+            }}
+          >
+            <span aria-hidden="true">＋</span>
+            {t("friendsForm.add")}
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent
+          className="friends-dialog"
+          onCloseAutoFocus={(event) => {
+            event.preventDefault();
+            trigger.current?.focus();
+          }}
+        >
+          <DialogHeader>
+            <DialogTitle>{t("friendsForm.add")}</DialogTitle>
+            <DialogDescription>{t("friendsForm.description")}</DialogDescription>
+          </DialogHeader>
+          <form onSubmit={addLink} className="friend-form">
+            <label htmlFor={`${id}-title`}>{t("friendsForm.title")}</label>
+            <input
+              id={`${id}-title`}
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
+              required
+              maxLength={80}
+              placeholder={t("friendsForm.titlePlaceholder")}
+            />
+            <label htmlFor={`${id}-url`}>{t("friendsForm.url")}</label>
+            <input
+              id={`${id}-url`}
+              value={url}
+              onChange={(event) => setUrl(event.target.value)}
+              required
+              type="text"
+              inputMode="url"
+              autoCapitalize="none"
+              spellCheck={false}
+              placeholder="https://example.com"
+              aria-describedby={error ? `${id}-error` : undefined}
+            />
+            {error && (
+              <p id={`${id}-error`} className="friend-error" role="alert">
+                {error}
+              </p>
+            )}
+            <div className="friend-form-actions">
+              <button type="button" onClick={() => setDialogOpen(false)}>
+                {t("friendsForm.cancel")}
+              </button>
+              <button type="submit">{t("friendsForm.save")}</button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
-
-

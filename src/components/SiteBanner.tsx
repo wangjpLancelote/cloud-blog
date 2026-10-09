@@ -4,7 +4,7 @@ import { BlogTitle } from "@/components/BlogTitle";
 import { usePathname } from "next/navigation";
 
 export function SiteBanner() {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "/";
   const isReading = /^\/books\/[^/]+\/?$/.test(pathname);
   if (isReading) return null;
 

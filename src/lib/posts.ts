@@ -85,15 +85,22 @@ function readPost(slug: string): PostWithContent {
       ? frontmatter.title
       : fallbackTitle;
 
-  // 生成摘要：优先使用 description，否则截取内容前 150 个字符
+  // Keep MDX markup and code out of the article-list excerpt.
+  const excerpt = content
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/^import\s.*$/gm, "")
+    .replace(/<[^>]*>/g, "")
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/^#{1,6}\s+.*$/gm, "")
+    .replace(/[#*`>]/g, "")
+    .replace(/&(?:emsp|ensp|nbsp);/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
   const summary =
-    typeof frontmatter.description === "string" &&
-    frontmatter.description.trim().length > 0
-      ? frontmatter.description
-      : `${content
-          .replace(/[#*`]/g, "") // 移除简单的 markdown 符号
-          .substring(0, 150)
-          .trim()}...`;
+    typeof frontmatter.description === "string" && frontmatter.description.trim()
+      ? frontmatter.description.trim()
+      : excerpt.slice(0, 150) + (excerpt.length > 150 ? "…" : "");
 
   // 计算字数：移除 markdown 语法后统计
   const plainText = content

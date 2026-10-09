@@ -14,7 +14,7 @@ const IconChevronRight = ChevronRight as unknown as ComponentType<{
 }>;
 
 export function Breadcrumb() {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "/";
   const { t } = useI18n();
   const { title: storeTitle } = useTitleStore();
 
@@ -27,12 +27,14 @@ export function Breadcrumb() {
     <nav className="flex items-center space-x-2 py-4 text-muted-text text-sm">
       <Link
         href="/"
+        aria-label={t("breadcrumb.home")}
         className="flex items-center hover:text-foreground transition-colors"
       >
         <IconHome className="w-4 h-4" />
       </Link>
 
       {paths.map((path, index) => {
+        if (index === 0 && (path === "blog" || path === "tools")) return null;
         const isLast = index === paths.length - 1;
         const href = `/${paths.slice(0, index + 1).join("/")}`;
 
@@ -48,13 +50,12 @@ export function Breadcrumb() {
             <IconChevronRight className="opacity-50 w-4 h-4" />
             {isLast ? (
               <span className="max-w-[300px] font-medium text-foreground truncate">
-                {storeTitle || label}
+                {paths.length > 1 && (paths[0] === "blog" || paths[0] === "books")
+                  ? storeTitle || decodeURIComponent(label)
+                  : label}
               </span>
             ) : (
-              <Link
-                href={href}
-                className="hover:text-foreground transition-colors"
-              >
+              <Link href={href} className="hover:text-foreground transition-colors">
                 {label}
               </Link>
             )}

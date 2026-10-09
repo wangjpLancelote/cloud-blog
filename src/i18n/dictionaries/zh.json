@@ -10,10 +10,12 @@
     "blog": "博客",
     "blockchain": "区块链",
     "learning": "学习笔记",
-    "books": "Books",
+    "books": "书架",
     "friends": "友链",
     "friendsEmpty": "暂无友链",
-    "navigation": "导航"
+    "navigation": "导航",
+    "home": "首页",
+    "notion-converter": "写作工具"
   },
   "books": {
     "eyebrow": "数字书房",
@@ -40,5 +42,44 @@
   },
   "breadcrumb": {
     "home": "首页"
+  },
+  "site": {
+    "skip": "跳至正文",
+    "footer": "记录思考，留一点空间给生活。",
+    "intro": "在云端，记录与思考。",
+    "description": "我是 Lorenzo，在这里分享前端、区块链，以及技术之外的日常与成长。",
+    "landscapeAlt": "暖灰色天空下，薄雾、落日与层叠的山丘",
+    "selected": "精选文章",
+    "recent": "最近 Writing",
+    "viewAll": "查看全部",
+    "collection": "篇记录，慢慢积累。",
+    "explore": "慢慢探索",
+    "blockchainDescription": "理解链上的世界与价值。",
+    "learningDescription": "让好奇心留下足迹。",
+    "booksDescription": "在文字里，遇见另一种生活。",
+    "archive": "所有文章",
+    "archiveDescription": "关于技术、探索，以及沿途的一些思考。",
+    "categories": "文章分类",
+    "all": "全部",
+    "posts": "篇文章",
+    "empty": "这个分类还没有文章。",
+    "notes": "笔记",
+    "copyLink": "复制文章链接",
+    "copied": "已复制",
+    "filterTags": "按标签筛选"
+  },
+  "friendsForm": {
+    "add": "添加友链",
+    "description": "输入标题和链接，保存到当前浏览器。",
+    "title": "标题",
+    "url": "链接",
+    "titlePlaceholder": "例如：我的博客",
+    "cancel": "取消",
+    "save": "添加",
+    "success": "友链已添加",
+    "invalidTitle": "请输入 1–80 个字符的标题。",
+    "invalidUrl": "请输入有效的 http 或 https 网站链接。",
+    "duplicate": "这个链接已经在友链中了。",
+    "saveError": "保存失败，请检查浏览器是否允许本地存储后重试。"
   }
 }

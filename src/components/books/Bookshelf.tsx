@@ -30,7 +30,7 @@ export function Bookshelf({ books, categories }: BookshelfProps) {
   );
 
   return (
-    <section className="mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-20 w-full max-w-7xl">
+    <section className="reading-width section-page">
       <header className="mb-10">
         <div className="flex items-center gap-2 mb-3 font-medium text-[#6e6b60] text-xs uppercase tracking-[0.24em]">
           <IconBookOpen className="w-4 h-4" />
