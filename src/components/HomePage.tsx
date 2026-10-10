@@ -29,9 +29,6 @@ export function HomePage({ posts }: { posts: PostItem[] }) {
       </div>
       <div className="reading-width">
         <section className="home-section" aria-labelledby="recent-heading">
-          <div className="section-heading">
-            <h2 id="recent-heading">{t("site.recent")}</h2>
-          </div>
           <FilterablePosts posts={posts} />
           <p className="collection-note">
             {posts.length} {t("site.collection")}

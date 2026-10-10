@@ -8,13 +8,16 @@ export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const toggleVisibility = () => setIsVisible(window.scrollY > 400);
+    const container = document.getElementById("app-main");
+    if (!container) return;
+    const toggleVisibility = () => setIsVisible(container.scrollTop > 400);
     toggleVisibility();
-    window.addEventListener("scroll", toggleVisibility, { passive: true });
-    return () => window.removeEventListener("scroll", toggleVisibility);
+    container.addEventListener("scroll", toggleVisibility, { passive: true });
+    return () => container.removeEventListener("scroll", toggleVisibility);
   }, []);
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const scrollToTop = () =>
+    document.getElementById("app-main")?.scrollTo({ top: 0, behavior: "smooth" });
 
   if (!isVisible) {
     return null;
@@ -40,11 +43,7 @@ export function ScrollToTop() {
         aria-hidden="true"
         role="img"
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M4.5 15.75l7.5-7.5 7.5 7.5"
-        />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
       </svg>
     </Button>
   );

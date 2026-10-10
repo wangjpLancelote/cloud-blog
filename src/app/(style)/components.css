@@ -63,18 +63,29 @@ pre code span {
 }
 
 /* Warm paper, quiet typography and translucent interaction surfaces. */
+html,
+.site-body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
 .site-body {
   background: #fdfcfb;
   color: #333;
 }
 .site-shell {
-  min-height: 100dvh;
+  height: 100dvh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 .site-shell > main {
   flex: 1;
   min-width: 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: none;
   outline: none;
 }
 .reading-width {
@@ -82,6 +93,7 @@ pre code span {
   margin-inline: auto;
 }
 .site-header {
+  flex-shrink: 0;
   position: sticky;
   top: 0;
   z-index: 40;
@@ -213,6 +225,58 @@ pre code span {
 .home-section {
   margin-top: 54px;
 }
+.posts-content {
+  min-width: 0;
+}
+.posts-sidebar {
+  position: fixed;
+  inset: 0 0 0 auto;
+  z-index: 30;
+  width: min(240px, calc((100vw - 800px) / 2 - 24px));
+  height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: none;
+  padding: 104px 20px 80px;
+  border-left: 1px solid #eae7e3;
+  background: #fdfcfb;
+}
+.sidebar-recent {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #eae7e3;
+}
+.sidebar-recent-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sidebar-recent-list li + li {
+  margin-top: 10px;
+}
+.sidebar-recent-list a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #605b54;
+  font-size: 14px;
+  line-height: 1.8;
+  transition: color 200ms;
+}
+.sidebar-recent-list a:hover {
+  color: #d99aaa;
+}
+@media (max-width: 1100px) {
+  .posts-sidebar {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    padding: 0;
+    margin-bottom: 16px;
+    border-left: 0;
+  }
+}
 .section-heading {
   display: flex;
   justify-content: space-between;
@@ -292,14 +356,14 @@ pre code span {
   max-width: 650px;
   font-size: 16px;
   line-height: 1.85;
-  color: #4f4b46;
-  margin-top: 8px;
+  color: #8a8a8a;
+  margin-top: 14px;
   overflow-wrap: anywhere;
 }
 .post-date {
   display: block;
-  margin-top: 10px;
-  color: #605b54;
+  margin-top: 4px;
+  color: #8a8a8a;
   font-size: 12px;
   letter-spacing: .04em;
   font-variant-numeric: tabular-nums;
@@ -311,8 +375,14 @@ pre code span {
     box-shadow: inset 0 1px 0 #fff, 0 3px 14px #3d352908;
     backdrop-filter: blur(10px);
   }
-  .post-row-link:hover h3 {
-    color: #805534;
+  .post-row:hover h3,
+  .post-row:hover .post-summary,
+  .post-row:hover .post-date,
+  .post-row:hover .post-tag,
+  .post-row:hover .post-copy {
+    color: #d99aaa;
+  }
+  .post-row:hover h3 {
     font-weight: 700;
   }
 }
