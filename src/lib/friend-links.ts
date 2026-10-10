@@ -1,6 +1,18 @@
 import { FRIEND_LINKS, type FriendLink } from "@/constants/friend-links";
 
 export const FRIEND_LINKS_STORAGE_KEY = "cloud-blog-friend-links";
+export const DELETED_FRIEND_LINKS_STORAGE_KEY = "cloud-blog-deleted-friend-links";
+
+export function readDeletedFriendLinks(storage: Pick<Storage, "getItem">): string[] {
+  try {
+    const data: unknown = JSON.parse(storage.getItem(DELETED_FRIEND_LINKS_STORAGE_KEY) ?? "[]");
+    return Array.isArray(data)
+      ? FRIEND_LINKS.filter((item) => data.includes(item.link)).map((item) => item.link)
+      : [];
+  } catch {
+    return [];
+  }
+}
 
 export function normalizeFriendUrl(value: string): string {
   const input = value.trim();
@@ -37,11 +49,13 @@ export function readSavedFriendLinks(storage: Pick<Storage, "getItem">): FriendL
   try {
     const data: unknown = JSON.parse(storage.getItem(FRIEND_LINKS_STORAGE_KEY) ?? "[]");
     if (!Array.isArray(data)) return [];
+    const deleted = readDeletedFriendLinks(storage);
+    const defaults = FRIEND_LINKS.filter((item) => !deleted.includes(item.link));
     const links: FriendLink[] = [];
     for (const item of data) {
       if (!item || typeof item.name !== "string" || typeof item.link !== "string") continue;
       try {
-        links.push(createFriendLink(item.name, item.link, [...FRIEND_LINKS, ...links]));
+        links.push(createFriendLink(item.name, item.link, [...defaults, ...links]));
       } catch {
         /* Ignore invalid saved entries. */
       }

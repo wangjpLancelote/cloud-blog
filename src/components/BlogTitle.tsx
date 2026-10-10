@@ -9,7 +9,6 @@ export function BlogTitle() {
   const [typedText, setTypedText] = useState(fullText);
 
   useEffect(() => {
-    // Respect reduced-motion preferences
     if (typeof window !== "undefined") {
       const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)");
       if (reduced?.matches) {
@@ -18,7 +17,6 @@ export function BlogTitle() {
       }
     }
 
-    // Simple typewriter effect on mount / when text changes
     const delayMs = 120;
     const speedMs = 40;
 
@@ -44,9 +42,9 @@ export function BlogTitle() {
   }, [fullText]);
 
   return (
-    <h1 className="text-center">
+    <span className="text-left">
       <span aria-hidden="true">{typedText}</span>
       <span className="sr-only">{fullText}</span>
-    </h1>
+    </span>
   );
 }

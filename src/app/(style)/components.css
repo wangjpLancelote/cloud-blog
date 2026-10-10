@@ -178,29 +178,16 @@ pre code span {
   letter-spacing: .19em;
   color: #605b54;
 }
+.home-lead {
+  text-align: left;
+}
 .home-intro {
   padding-top: 62px;
   padding-bottom: 34px;
 }
-.home-intro h1 {
-  margin: 17px 0 14px;
-  font-family: Georgia, "Songti SC", "Noto Serif CJK SC", serif;
-  font-weight: 500;
-  font-size: clamp(28px, 3.3vw, 40px);
-  line-height: 1.5;
-  letter-spacing: -.025em;
-  color: #222;
-  text-wrap: balance;
-}
-.home-intro p {
-  font-size: 16px;
-  line-height: 1.9;
-  color: #4f4b46;
-  max-width: 640px;
-}
 .home-landscape {
-  width: min(980px, calc(100% - 48px));
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
 }
 .home-landscape img {
   width: 100%;
@@ -559,16 +546,12 @@ button:focus-visible {
   .mobile-menu {
     display: grid;
   }
-  .reading-width,
-  .home-landscape {
+  .reading-width {
     width: calc(100% - 40px);
   }
   .home-intro {
     padding-top: 38px;
     padding-bottom: 26px;
-  }
-  .home-intro p {
-    font-size: 15px;
   }
   .eyebrow {
     font-size: 11px;
@@ -889,6 +872,39 @@ button:focus-visible {
   font-size: 13px;
   color: #a13530;
   line-height: 1.6;
+}
+.friend-manage {
+  display: grid;
+  gap: 8px;
+}
+.friend-manage-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e3ddd4;
+}
+.friend-delete {
+  flex-shrink: 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #f8eae8;
+  color: #a13530;
+  font-size: 14px;
+  cursor: pointer;
+}
+.friend-delete:hover {
+  background: #f1d8d4;
+}
+.friend-delete:focus-visible {
+  outline: 2px solid #a13530;
+  outline-offset: 2px;
+}
+.friend-empty {
+  padding: 12px;
+  color: #605b54;
+  font-size: 14px;
+  text-align: center;
 }
 
 .writing-workspace {
